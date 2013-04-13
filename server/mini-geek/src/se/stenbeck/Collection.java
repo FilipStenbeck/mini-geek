@@ -12,18 +12,15 @@ import org.json.JSONObject;
 
 public class Collection extends BGGServlet {
 
+	private static final long serialVersionUID = -8357734276513898831L;
+
 	@Override
 	public void handleRequest(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		PrintWriter out = null;
 		try {
 			
-			//Proxy
-			System.setProperty("http.proxyHost", "172.30.172.141");
-			System.setProperty("http.proxyPort", "8080");
-			
 			String username = req.getParameter("username");	
-			resp.setContentType("text/html");
 			out = resp.getWriter();
 			JSONObject obj = new JSONObject();
 			JSONArray results = BggXmlApiUtil.getCollection(username);

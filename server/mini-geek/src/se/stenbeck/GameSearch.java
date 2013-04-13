@@ -20,7 +20,6 @@ public class GameSearch extends BGGServlet {
 			throws IOException {
 		PrintWriter out = null;
 		try {
-			resp.setContentType("text/html");
 			out = resp.getWriter();
 			String query = req.getParameter("query");	
 			

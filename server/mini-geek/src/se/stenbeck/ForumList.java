@@ -24,7 +24,6 @@ public class ForumList extends BGGServlet {
 			String game = req.getParameter("game");	
 			String[] split = id.split("#");
 			
-			resp.setContentType("text/html");
 			out = resp.getWriter();
 			JSONObject obj = new JSONObject();
 			JSONArray array = null;

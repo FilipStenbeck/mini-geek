@@ -17,8 +17,6 @@ import org.w3c.dom.NodeList;
 
 
 public final class BggXmlApiUtil {
-		
-	private static Node firstChild;
 
 
 

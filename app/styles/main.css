@@ -1,5 +1,9 @@
 /* Will be compiled down to a single stylesheet with your sass files */
 
+ul {
+    list-style-type: none !important;  
+}
+
 @media (min-width: 980px) { 
     .main-container {
     margin-top: 65px;

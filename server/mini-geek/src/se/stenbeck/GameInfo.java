@@ -20,7 +20,6 @@ public class GameInfo extends BGGServlet {
 		PrintWriter out = null;
 		try {
 			String id = req.getParameter("id");	
-			resp.setContentType("text/html");
 			out = resp.getWriter();
 			JSONObject obj = new JSONObject();
 			JSONArray array = BggXmlApiUtil.getgameInfo(id);

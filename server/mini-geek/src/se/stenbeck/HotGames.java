@@ -20,9 +20,6 @@ public class HotGames extends BGGServlet {
 			throws IOException {
 		PrintWriter out = null;
 		try {
-			
-			resp.setContentType("application/json");
-			resp.setCharacterEncoding("UTF-8");
 			out = resp.getWriter();
 			JSONObject obj = new JSONObject();
 			JSONArray results = BggXmlApiUtil.getHotGames();

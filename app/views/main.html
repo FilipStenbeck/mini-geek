@@ -21,12 +21,17 @@
         <div class="span3">
             {{foo}}
         </div>
-        <div class="span3">
+        <div class="span6">
             <ul>
-                <li ng-repeat="game in gameList">
-                     {{game.name}} 
+                <li class="well" ng-repeat="game in gameList">
+                    <div>
+                        <a ng-click='getDetails(game.id)' href="#">{{game.name}} </a>
+                    </div>
                 </li>
             </ul>
-        </div>
+        </div> 
+        <div class="span3">
+            {{$scope.details.description}}
+        </div>    
 	</div>
 </div>
