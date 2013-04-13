@@ -1,0 +1,7 @@
+/* Will be compiled down to a single stylesheet with your sass files */
+
+@media (min-width: 980px) { 
+    .main-container {
+    margin-top: 65px;
+    }
+}

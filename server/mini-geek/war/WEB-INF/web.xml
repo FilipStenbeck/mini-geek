@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	<servlet>
+		<servlet-name>Mini_geek</servlet-name>
+		<servlet-class>se.stenbeck.Mini_geekServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Mini_geek</servlet-name>
+		<url-pattern>/mini_geek</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>search</servlet-name>
+		<servlet-class>se.stenbeck.GameSearch</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>search</servlet-name>
+		<url-pattern>/search</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>hotgames</servlet-name>
+		<servlet-class>se.stenbeck.HotGames</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>hotgames</servlet-name>
+		<url-pattern>/hotgames</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>collection</servlet-name>
+		<servlet-class>se.stenbeck.Collection</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>collection</servlet-name>
+		<url-pattern>/collection</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>gameinfo</servlet-name>
+		<servlet-class>se.stenbeck.GameInfo</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>gameinfo</servlet-name>
+		<url-pattern>/gameinfo</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>forumlist</servlet-name>
+		<servlet-class>se.stenbeck.ForumList</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>forumlist</servlet-name>
+		<url-pattern>/forumlist</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>videolist</servlet-name>
+		<servlet-class>se.stenbeck.VideoList</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>videolist</servlet-name>
+		<url-pattern>/videolist</url-pattern>
+	</servlet-mapping>
+	
+	
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+</web-app>
