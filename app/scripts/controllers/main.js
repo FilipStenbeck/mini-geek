@@ -19,12 +19,12 @@ miniGeekApp.factory('eventBroadcaster', function ($rootScope) {
     eventBroadcaster.broadcast = function (evName, msg) {
         this.message = msg;
         this.eventName = evName;
-        
         this.broadcastItem();
     };
 
     // This method broadcasts an event with the specified name.
     eventBroadcaster.broadcastItem = function () {
+        $('#welcome-message').fadeOut('slow');
         $rootScope.$broadcast(this.eventName);
     };
     
