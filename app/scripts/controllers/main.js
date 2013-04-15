@@ -61,7 +61,7 @@ miniGeekApp.controller('ListCtrl', function ($scope, $http, eventBroadcaster) {
      }
         
     if (eventBroadcaster.eventName === 'menuClicked') {
-         $('.game-details-table').hide();
+         $('.game-details').hide();
         if (eventBroadcaster.message === 'popular') {
             
             //Only get the hot game list once, then use cached
@@ -96,8 +96,8 @@ miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcas
             //connect the response to scope
             $scope.details = data.result[0];
             
-              //Show the table
-            $('.game-details-table').show();
+              //Show the details
+            $('#game-details').fadeIn();
             
         });
    };
