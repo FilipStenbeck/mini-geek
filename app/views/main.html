@@ -47,10 +47,10 @@
               <button ng-click="showForums()" class="btn">Forums</button>
             </div>
             
-            <a class="pull-left" href="{{details.link}}" target="_blank">
+            <a class="overview pull-left" href="{{details.link}}" target="_blank">
                 <img class="media-object" src="{{details.thumbnail}}" style="margin-right: 30px;"/>
             </a>
-            <div class="media-body">
+            <div class="overview media-body">
                 <h4 class="media-heading">{{details.name}}</h4>
                 <span>{{details.description}}</span>
                
@@ -71,11 +71,12 @@
                         </tr>
                     </tbody> 
                 </table>
-               
             </div>
             
             <!-- VIDEO LIST  -->
-            <div class="media-body">
+             
+            <br>
+            <div id ="video-list" class="media-body" style="display: none;">
                 <table  class="table table-bordered table-striped ">        
                     <thead> 
                         <tr>
@@ -90,7 +91,7 @@
                     </tbody> 
                 </table>    
             </div>
-        </div>
+      </div>
     
     </div>    
         

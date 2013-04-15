@@ -112,22 +112,24 @@ miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcas
             url : miniGeekApp.ROOT_URL + 'videolist',
             params : {id : id}
         }).success(function (data) {
-           console.log(data);
+            $('#video-list').fadeIn();
             $scope.videoList = data.result;
         });
     };    
     
     
     $scope.showVideos = function () {
+         $('.overview').hide();
        getGameVideos($scope, $http, miniGeekApp.gameId);  
     };
     
      $scope.showOverivew = function () {
-        console.log("show Overview for " + miniGeekApp.gameId);
+        $('#video-list').hide();
+       $('.overview').fadeIn();
     };
     
      $scope.showForums = function () {
-        console.log("show forums for " + miniGeekApp.miniGeekApp.gameId);
+        console.log("show forums for " + miniGeekApp.gameId);
     };
     
     
