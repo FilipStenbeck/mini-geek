@@ -20,7 +20,14 @@ miniGeekApp.factory('eventBroadcaster', function ($rootScope) {
     eventBroadcaster.broadcastItem = function () {
         $rootScope.$broadcast(this.eventName);
         console.log('Brodcaster broadcasted ' + this.message);
+       
     };
+    
+    eventBroadcaster.reset = function () {
+        eventBroadcaster.eventName = "";
+        eventBroadcaster.message = "";
+    };
+
     return eventBroadcaster;
 });
 
@@ -75,14 +82,8 @@ miniGeekApp.controller('ListCtrl', function ($scope, $http, eventBroadcaster) {
         } else if (eventBroadcaster.message === 'about') {
             $scope.foo = 'Du vill veta mer om mig';
         }
+        eventBroadcaster.reset();
     }
-   
-    //$scope.details = miniGeekApp.getGameInfo($scope, $http);
-     //Clear the broadcaster
-    
-    eventBroadcaster.eventName = "";
-    eventBroadcaster.message = "";
-    
     
    
 });
