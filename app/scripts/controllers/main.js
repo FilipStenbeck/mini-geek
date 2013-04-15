@@ -1,7 +1,9 @@
 'use strict';
 var miniGeekApp = angular.module('miniGeekApp');
-//miniGeekApp.ROOT_URL = 'http://localhost:8888/';
 miniGeekApp.ROOT_URL = 'http://mini-geek-service.appspot.com/';
+
+//cached version of hot games
+miniGeekApp.hotList = [];
 
 miniGeekApp.factory('eventBroadcaster', function ($rootScope) {
     
@@ -45,9 +47,12 @@ miniGeekApp.controller('MenuCtrl', function ($scope, eventBroadcaster) {
 
 miniGeekApp.controller('ListCtrl', function ($scope, $http, eventBroadcaster) {
     
+    
+    
     var getHotGames = function ($scope, $http) {
         $http.get(miniGeekApp.ROOT_URL + 'hotgames').success(function (data) {
-           $scope.gameList = data.result;
+            $scope.gameList = data.result;
+            miniGeekApp.hotList = $scope.gameList;
         });
     };
     
@@ -58,7 +63,13 @@ miniGeekApp.controller('ListCtrl', function ($scope, $http, eventBroadcaster) {
     if (eventBroadcaster.eventName === 'menuClicked') {
          $('.game-details-table').hide();
         if (eventBroadcaster.message === 'popular') {
-            getHotGames($scope, $http);
+            
+            //Only get the hot game list once, then use cached
+            if (miniGeekApp.hotList.length === 0) {
+                getHotGames($scope, $http);
+            } else {
+                 $scope.gameList = miniGeekApp.hotList;
+            }
         } else if (eventBroadcaster.message === 'search') {
             $scope.foo = 'Du vill söka efter spel';
         } else if (eventBroadcaster.message === 'about') {
