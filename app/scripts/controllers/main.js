@@ -1,6 +1,7 @@
 'use strict';
 var miniGeekApp = angular.module('miniGeekApp');
-miniGeekApp.ROOT_URL = 'http://localhost:8888/';
+//miniGeekApp.ROOT_URL = 'http://localhost:8888/';
+miniGeekApp.ROOT_URL = 'http://mini-geek-service.appspot.com/';
 
 miniGeekApp.factory('eventBroadcaster', function ($rootScope) {
     
@@ -19,8 +20,7 @@ miniGeekApp.factory('eventBroadcaster', function ($rootScope) {
     // This method broadcasts an event with the specified name.
     eventBroadcaster.broadcastItem = function () {
         $rootScope.$broadcast(this.eventName);
-        console.log('Brodcaster broadcasted ' + this.message);
-       
+        console.log('Brodcaster broadcasted ' + this.message); 
     };
     
     eventBroadcaster.reset = function () {
@@ -30,8 +30,6 @@ miniGeekApp.factory('eventBroadcaster', function ($rootScope) {
 
     return eventBroadcaster;
 });
-
-
 
 miniGeekApp.controller('MenuCtrl', function ($scope, eventBroadcaster) {
    
@@ -53,26 +51,12 @@ miniGeekApp.controller('ListCtrl', function ($scope, $http, eventBroadcaster) {
            $scope.gameList = data.result;
         });
     };
-
-   var getGameInfo = function ($scope, $http, id) {
-        $http({
-            method : 'GET',
-            url : miniGeekApp.ROOT_URL + 'gameinfo',
-            params : {id : id}
-        }).success(function (data) {
-            $scope.details = data.result[0];
-            console.log($scope.details.description);
-            console.log($scope.details.rating);
-        });
-    };
     
-     $scope.getDetails = function (id) {
-        console.log(id);
-         console.log("getDetails");
-        getGameInfo($scope, $http, id);
+    $scope.getDetails = function (id) {
+        console.log(id + ' clicked');
+         eventBroadcaster.broadcast("showGameInfo", id);
      }
-    
-    
+        
     if (eventBroadcaster.eventName === 'menuClicked') {
         if (eventBroadcaster.message === 'popular') {
            // $scope.foo = 'Du har val populära spel';
@@ -88,10 +72,23 @@ miniGeekApp.controller('ListCtrl', function ($scope, $http, eventBroadcaster) {
    
 });
 
-
-
-
-
-
- 
-
+miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcaster) {
+    $scope.details = 'foooo';
+    
+   var getGameInfo = function ($scope, $http, id) {
+        $http({
+            method : 'GET',
+            url : miniGeekApp.ROOT_URL + 'gameinfo',
+            params : {id : id}
+        }).success(function (data) {
+            $scope.details = data.result[0];
+            console.log($scope.details.description);
+            console.log($scope.details.rating);
+        });
+   };
+    
+    if (eventBroadcaster.eventName === 'showGameInfo') {
+        getGameInfo($scope, $http, eventBroadcaster.message);
+        eventBroadcaster.reset();
+    }
+});

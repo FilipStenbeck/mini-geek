@@ -30,8 +30,39 @@
                 </li>
             </ul>
         </div> 
-        <div class="span3">
-            {{$scope.details.description}}
-        </div>    
+       
 	</div>
+    <div class="row" ng-controller="GameDetailsCtrl"> 
+        <div class="well" >
+            <div class="media">
+                <a class="pull-left" href="{{link}}" target="_blank">
+                    <img class="media-object" src="{{details.thumbnail}}" style="margin-right: 30px;"/>
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading">{{details.name}}</h4>
+                    <span>{{details.description}}</span>
+                    <div class="row">
+                        <ul>
+                            <li>{{details.rating}}</li>
+                            <li>{{details.players}}</li>
+                            <li>{{details.yearpublished}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+        
+        
+        
+        
+        <!-- 
+        <div class="span1">
+          
+        </div>
+        <div class="span1">
+            <img src="{{details.thumbnail}}" title="{{details.name}}"  height="42" width="42"/>
+        </div>   
+    </div>
 </div>
+-->
