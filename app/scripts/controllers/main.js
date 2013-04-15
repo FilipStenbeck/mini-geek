@@ -8,9 +8,8 @@ miniGeekApp.gameId = '';
 miniGeekApp.game = {};
 
 
+ //event bus
 miniGeekApp.factory('eventBroadcaster', function ($rootScope) {
-    
-    // eventBroadcaster is the object created by the factory method.
     var eventBroadcaster = {};
     eventBroadcaster.message = '';
     eventBroadcaster.eventName = '';
@@ -36,8 +35,8 @@ miniGeekApp.factory('eventBroadcaster', function ($rootScope) {
     return eventBroadcaster;
 });
 
+//The top menu
 miniGeekApp.controller('MenuCtrl', function ($scope, eventBroadcaster) {
-   
     $scope.selected = "";
     var broadcaster = eventBroadcaster;
     $scope.setSelected = function (item) {
@@ -48,10 +47,12 @@ miniGeekApp.controller('MenuCtrl', function ($scope, eventBroadcaster) {
 	};
 });
 
+//The main view
 miniGeekApp.controller('ListCtrl', function ($scope, $http, eventBroadcaster) {
-    
     var getHotGames = function ($scope, $http) {
         $http.get(miniGeekApp.ROOT_URL + 'hotgames').success(function (data) {
+            
+            //Connect the data with the view and creat a gamelit cache
             $scope.gameList = data.result;
             miniGeekApp.hotList = $scope.gameList;
         });
@@ -66,7 +67,7 @@ miniGeekApp.controller('ListCtrl', function ($scope, $http, eventBroadcaster) {
          $('.game-details').hide();
         if (eventBroadcaster.message === 'popular') {
             
-            //Only get the hot game list once, then use cached
+            //Only get the hot game list once, then use cached version
             if (miniGeekApp.hotList.length === 0) {
                 getHotGames($scope, $http);
             } else {
@@ -83,8 +84,8 @@ miniGeekApp.controller('ListCtrl', function ($scope, $http, eventBroadcaster) {
    
 });
 
+//Game details view
 miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcaster) {
-    
     var getGameInfo = function ($scope, $http, id) {  
         $http({
             method : 'GET',
@@ -95,8 +96,10 @@ miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcas
             data.result[0].link = 'http://boardgamegeek.com/boardgame/' + id;
             data.result[0].description =   data.result[0].description.replace(/&#10;/g, " ");
             
-            //connect the response to scope
+            //connect the data with the view
             $scope.details = data.result[0];
+            
+            //Keep a cashed list of game
             miniGeekApp.game = data.result[0];
             
               //Show the details
@@ -118,6 +121,7 @@ miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcas
     };    
     
     
+    //Handlers for buttons in Game Details
     $scope.showVideos = function () {
          $('.overview').hide();
        getGameVideos($scope, $http, miniGeekApp.gameId);  
@@ -131,8 +135,7 @@ miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcas
      $scope.showForums = function () {
         console.log("show forums for " + miniGeekApp.gameId);
     };
-    
-    
+
     if (eventBroadcaster.eventName === 'showGameInfo') {
         getGameInfo($scope, $http, eventBroadcaster.message);
         eventBroadcaster.reset();
