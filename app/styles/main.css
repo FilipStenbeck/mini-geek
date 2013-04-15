@@ -4,6 +4,10 @@ ul {
     list-style-type: none !important;  
 }
 
+.game-details-table {
+    margin-top: 20px;
+}
+
 @media (min-width: 980px) { 
     .main-container {
     margin-top: 65px;

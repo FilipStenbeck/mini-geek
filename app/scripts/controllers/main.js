@@ -14,13 +14,13 @@ miniGeekApp.factory('eventBroadcaster', function ($rootScope) {
     eventBroadcaster.broadcast = function (evName, msg) {
         this.message = msg;
         this.eventName = evName;
+        
         this.broadcastItem();
     };
 
     // This method broadcasts an event with the specified name.
     eventBroadcaster.broadcastItem = function () {
         $rootScope.$broadcast(this.eventName);
-        console.log('Brodcaster broadcasted ' + this.message); 
     };
     
     eventBroadcaster.reset = function () {
@@ -36,7 +36,6 @@ miniGeekApp.controller('MenuCtrl', function ($scope, eventBroadcaster) {
     $scope.selected = "";
     var broadcaster = eventBroadcaster;
     $scope.setSelected = function (item) {
-          console.log("Menu clicked");
 		$scope.selected = item;
         if (item !== undefined) {
             broadcaster.broadcast("menuClicked", item);
@@ -53,13 +52,12 @@ miniGeekApp.controller('ListCtrl', function ($scope, $http, eventBroadcaster) {
     };
     
     $scope.getDetails = function (id) {
-        console.log(id + ' clicked');
          eventBroadcaster.broadcast("showGameInfo", id);
      }
         
     if (eventBroadcaster.eventName === 'menuClicked') {
+         $('.game-details-table').hide();
         if (eventBroadcaster.message === 'popular') {
-           // $scope.foo = 'Du har val populära spel';
             getHotGames($scope, $http);
         } else if (eventBroadcaster.message === 'search') {
             $scope.foo = 'Du vill söka efter spel';
@@ -73,17 +71,23 @@ miniGeekApp.controller('ListCtrl', function ($scope, $http, eventBroadcaster) {
 });
 
 miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcaster) {
-    $scope.details = 'foooo';
-    
+        
    var getGameInfo = function ($scope, $http, id) {
         $http({
             method : 'GET',
             url : miniGeekApp.ROOT_URL + 'gameinfo',
             params : {id : id}
         }).success(function (data) {
+            //Clean the response
+            data.result[0].link = 'http://boardgamegeek.com/boardgame/' + id;
+            data.result[0].description =   data.result[0].description.replace(/&#10;/g, " ");
+            
+            //connect the response to scope
             $scope.details = data.result[0];
-            console.log($scope.details.description);
-            console.log($scope.details.rating);
+            
+              //Show the table
+            $('.game-details-table').show();
+            
         });
    };
     
