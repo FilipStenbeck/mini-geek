@@ -8,6 +8,11 @@ ul {
     margin-top: 20px;
 }
 
+.game-details-controls {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 @media (min-width: 980px) { 
     .main-container {
     margin-top: 65px;

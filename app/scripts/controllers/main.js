@@ -2,8 +2,11 @@
 var miniGeekApp = angular.module('miniGeekApp');
 miniGeekApp.ROOT_URL = 'http://mini-geek-service.appspot.com/';
 
-//cached version of hot games
+//cached data
 miniGeekApp.hotList = [];
+miniGeekApp.gameId = '';
+miniGeekApp.game = {};
+
 
 miniGeekApp.factory('eventBroadcaster', function ($rootScope) {
     
@@ -47,8 +50,6 @@ miniGeekApp.controller('MenuCtrl', function ($scope, eventBroadcaster) {
 
 miniGeekApp.controller('ListCtrl', function ($scope, $http, eventBroadcaster) {
     
-    
-    
     var getHotGames = function ($scope, $http) {
         $http.get(miniGeekApp.ROOT_URL + 'hotgames').success(function (data) {
             $scope.gameList = data.result;
@@ -57,7 +58,8 @@ miniGeekApp.controller('ListCtrl', function ($scope, $http, eventBroadcaster) {
     };
     
     $scope.getDetails = function (id) {
-         eventBroadcaster.broadcast("showGameInfo", id);
+        miniGeekApp.gameId = id;
+        eventBroadcaster.broadcast("showGameInfo", id);
      }
         
     if (eventBroadcaster.eventName === 'menuClicked') {
@@ -82,8 +84,8 @@ miniGeekApp.controller('ListCtrl', function ($scope, $http, eventBroadcaster) {
 });
 
 miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcaster) {
-        
-   var getGameInfo = function ($scope, $http, id) {
+    
+    var getGameInfo = function ($scope, $http, id) {  
         $http({
             method : 'GET',
             url : miniGeekApp.ROOT_URL + 'gameinfo',
@@ -95,15 +97,41 @@ miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcas
             
             //connect the response to scope
             $scope.details = data.result[0];
+            miniGeekApp.game = data.result[0];
             
               //Show the details
             $('#game-details').fadeIn();
             
         });
-   };
+    };
+    
+    var getGameVideos = function ($scope, $http, id) {  
+        console.log("show videos for " + miniGeekApp.gameId);
+        $http({
+            method : 'GET',
+            url : miniGeekApp.ROOT_URL + 'videolist',
+            params : {id : id}
+        }).success(function (data) {
+           console.log(data);
+        });
+    };    
+    
+    
+    $scope.showVideos = function () {
+       getGameVideos($scope, $http, miniGeekApp.gameId);  
+    };
+    
+     $scope.showOverivew = function () {
+        console.log("show Overview for " + miniGeekApp.gameId);
+    };
+    
+     $scope.showForums = function () {
+        console.log("show forums for " + miniGeekApp.miniGeekApp.gameId);
+    };
+    
     
     if (eventBroadcaster.eventName === 'showGameInfo') {
         getGameInfo($scope, $http, eventBroadcaster.message);
         eventBroadcaster.reset();
-    }
+    } 
 });

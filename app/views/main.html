@@ -36,6 +36,13 @@
     <div class="row" ng-controller="GameDetailsCtrl"> 
       
         <div id="game-details" class="media" style="display: none;">
+            
+            <div class="btn-group game-details-controls">
+              <button  ng-click="showVideos()" class="btn">Videos</button>
+              <button ng-click="showOverivew()" class="btn">Overview</button>
+              <button ng-click="showForums()" class="btn">Forums</button>
+            </div>
+            
             <a class="pull-left" href="{{details.link}}" target="_blank">
                 <img class="media-object" src="{{details.thumbnail}}" style="margin-right: 30px;"/>
             </a>
