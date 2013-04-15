@@ -40,7 +40,7 @@
     <div class="row" ng-controller="GameDetailsCtrl"> 
       
         <div id="game-details" class="media" style="display: none;">
-            
+             <h4 class="media-heading">{{details.name}}</h4>
             <div class="btn-group game-details-controls">
               <button  ng-click="showVideos()" class="btn">Videos</button>
               <button ng-click="showOverivew()" class="btn">Overview</button>
@@ -51,7 +51,7 @@
                 <img class="media-object" src="{{details.thumbnail}}" style="margin-right: 30px;"/>
             </a>
             <div class="overview media-body">
-                <h4 class="media-heading">{{details.name}}</h4>
+               
                 <span>{{details.description}}</span>
                
                     
