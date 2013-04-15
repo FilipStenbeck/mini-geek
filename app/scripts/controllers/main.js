@@ -113,6 +113,7 @@ miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcas
             params : {id : id}
         }).success(function (data) {
            console.log(data);
+            $scope.videoList = data.result;
         });
     };    
     

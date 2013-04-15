@@ -1,3 +1,4 @@
+<!-- HEADER & MENU  -->
 <div class="navbar navbar-inverse navbar-fixed-top" ng-controller="MenuCtrl">
     <div class="navbar-inner">
 	   <div class="container">
@@ -17,6 +18,8 @@
        </div>
     </div>
 </div>
+
+<!-- GAME LIST  -->
 <div class="container main-container">
 	<div class="row" ng-controller="ListCtrl">
         <div class="span3">
@@ -30,9 +33,10 @@
                     </div>
                 </li>
             </ul>
-        </div> 
-       
+        </div>    
 	</div>
+    
+    <!-- GAME DETAILS  -->
     <div class="row" ng-controller="GameDetailsCtrl"> 
       
         <div id="game-details" class="media" style="display: none;">
@@ -69,19 +73,28 @@
                 </table>
                
             </div>
+            
+            <!-- VIDEO LIST  -->
+            <div class="media-body">
+                <table  class="table table-bordered table-striped ">        
+                    <thead> 
+                        <tr>
+                            <th>Videos</th>
+                         
+                        </tr>
+                    </thead>
+                    <tbody> 
+                        <tr ng-repeat="video in videoList">
+                            <td><a href="{{video.link}}" target="_blank"> {{video.title}}</a></td>
+                        </tr>
+                    </tbody> 
+                </table>    
+            </div>
         </div>
+    
     </div>    
         
         
         
         
-        <!-- 
-        <div class="span1">
-          
-        </div>
-        <div class="span1">
-            <img src="{{details.thumbnail}}" title="{{details.name}}"  height="42" width="42"/>
-        </div>   
-    </div>
-</div>
--->
+    

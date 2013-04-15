@@ -100,8 +100,10 @@ public final class BggXmlApiUtil {
 			Node node = childNodes.item(s);
 			if (node.getNodeType() == Node.ELEMENT_NODE) {
 				JSONObject video = new JSONObject();
-				String link = "<a href='"+ node.getAttributes().getNamedItem("link").getNodeValue() +"'>" + node.getAttributes().getNamedItem("title").getNodeValue();
+				String link = node.getAttributes().getNamedItem("link").getNodeValue(); 
+				String title = node.getAttributes().getNamedItem("title").getNodeValue();
 				video.put("link", link);
+				video.put("title", title);
 				videos.put(video);
 			}
 		 }
