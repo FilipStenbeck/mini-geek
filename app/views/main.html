@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span> 
                 <span class="icon-bar"></span>
            </a> 
-           <a class="brand" ng-click="setSelected('popular')" href="#">Menu</a>
+           <a class="brand" ng-click="setSelected('history')" href="#">Home</a>
            <div class="nav-collapse collapse">
                <ul class="nav">
                     <li><a ng-click="setSelected('popular')" href="#">Popular games</a></li>
@@ -26,6 +26,12 @@
         <div class="span12">
             <h4>{{message}} </h4>
         </div>
+        
+        <div id="search-form" class="input-append"  style="display: none;">
+            <input class="span5 search-field" id="appendedInputButton" type="text" ng-model="search.query">
+            <button class="btn" type="submit" ng-click='search()'>Search</button>
+        </div>
+        
         <div class="span12 game-list" ng-repeat="game in gameList">
             
             <a  class="btn btn-info game-list" ng-click='getDetails(game.id)' href="#">

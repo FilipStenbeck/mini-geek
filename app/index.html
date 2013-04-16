@@ -19,7 +19,7 @@
 </head>
   <body ng-app="miniGeekApp">
     <!--[if lt IE 7]>
-      <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+      <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?        redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
     <![endif]-->
 
     <!--[if lt IE 9]>
@@ -27,11 +27,10 @@
       <script src="components/json3/lib/json3.min.js"></script>
     <![endif]-->
     
-      
     <!-- Add your site or application content here -->
     <div class="container" ng-view></div>
     
- 
+    <!-- Welcome message-->
    <div id="welcome-message" class=" hero-unit default-margin header">
       <div class="container">
           <h1>Mini Geek</h1>
@@ -39,23 +38,40 @@
       </div>
     </div>  
       
-  
-	
+  <!-- About-->
+    <div id="about" class="well well-large" style="display: none;">
+      <p>This is a Mobile Web App for browsing boardgames on <a href="http://www.boardgamegeek.com/">boardgamegeek.com</a> </p>
+    
+      <p>The app includes functionality for:</p>
+       <ul>
+        <li><i class="icon-ok"></i> Listing popular games</li>
+        <li><i class="icon-ok"></i> Searching for games</li>
+        <li><i class="icon-ok"></i> Viewing game details</li>
+        <li><i class="icon-ok"></i> Reading forum posts</li>
+        <li><i class="icon-ok"></i> Watching game videos [youtube]</li>
+      </ul> 
+    
+      <p>Contact information and source code  :</p>
+      <p>
+        <a href="http://boardgamegeek.com/user/efilips" target="top"><img src="img/Geek_Head.jpg" width="65px"></a>
+        <a href="https://twitter.com/FilipStenbeck" target="top"><img src="img/twitter-bird-light-bgs.png" width="65px"></a>
+        <a href="http://www.linkedin.com/profile/view?id=12116865&amp;trk" target="top"><img src="img/LinkedInButton.JPG" width="55px"></a> &nbsp; 
+        <a href="https://github.com/FilipStenbeck/mini-geek/" target="top"><img src="img/github-logo-transparent.png" width="65px"></a>
+      </p>
+    </div>
+
 	<script src="components/jquery/jquery.min.js"></script>
     <script src="components/angular/angular.js"></script>
 	<script src="components/bootstrap/bootstrap.min.js"></script>
- 
-    
-    
+        
     <!-- build:js scripts/scripts.js -->
     <script src="scripts/app.js"></script>
-    
     <script src="scripts/controllers/main.js"></script>
     <!-- endbuild -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
-      var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+      var _gaq=[['_setAccount','UA-21135392-2'],['_trackPageview']];
       (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
       g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
       s.parentNode.insertBefore(g,s)}(document,'script'));

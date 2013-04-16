@@ -25,6 +25,13 @@ h1 {
     text-align: center;
 }
 
+#search-form {
+    margin-bottom: 20px;
+}
+.search-field {
+    width: 242px !important;
+    margin-bottom: 10px;
+}
 
 .game-list a   {
     width: 80%;
@@ -47,15 +54,13 @@ h1 {
     text-align: center;
 }
 
-<!--
-  background: url(../img/red-dice.png);
-    background-size:800px,603px;
-    background-repeat:no-repeat;
-    height: 436px;
--->
-.hero-unit {
-    color: rgb(153, 153, 153);
-    margin-top: -50px;
+
+.welcome-message {
+   background-color: rgb(245, 245, 245) !mportant;
+border: 1px solid rgb(227, 227, 227)!mportant;
+border-radius: 4px 4px 4px 4px!mportant;
+box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05) inset!mportant;
+    margin-top: -50px!mportant;
 }
 
 .lead {

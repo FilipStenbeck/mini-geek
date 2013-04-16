@@ -67,28 +67,52 @@ miniGeekApp.controller('ListCtrl', function ($scope, $http, eventBroadcaster) {
         });
     };
     
+     var searchGames = function ($scope, $http) {
+         $http({
+            method : 'GET',
+            url : miniGeekApp.ROOT_URL + 'search',
+            params : {
+                        query :  $scope.search.query
+                     }
+        }).success(function (data) {
+            //Connect the data with the view and creat a gamelit cache
+            $scope.gameList = data.result;
+            miniGeekApp.hotList = $scope.gameList;
+        });
+    };
+    
     $scope.getDetails = function (id) {
         miniGeekApp.gameId = id;
         eventBroadcaster.broadcast("showGameInfo", id);
      }
         
     if (eventBroadcaster.eventName === 'menuClicked') {
-         $('.game-details').hide();
+        $('.game-details').hide();
+        $('#about').hide();
         if (eventBroadcaster.message === 'popular') {
-              $scope.message = 'Popular Games';
-            //Only get the hot game list once, then use cached version
+            $scope.message = 'Popular Games';
+            getHotGames($scope, $http);
+        } else if (eventBroadcaster.message === 'search') {
+            $scope.message = 'Search';
+            $('#search-form').fadeIn();
+        } else if (eventBroadcaster.message === 'about') {
+            $scope.message = '';
+              $('#about').fadeIn();
+        } else if (eventBroadcaster.message === 'history') {
+            //Only get the game list once, then use cached version from perevious serch or popular list
             if (miniGeekApp.hotList.length === 0) {
                 getHotGames($scope, $http);
             } else {
                  $scope.gameList = miniGeekApp.hotList;
             }
-        } else if (eventBroadcaster.message === 'search') {
-            $scope.message = 'Du vill söka efter spel';
-        } else if (eventBroadcaster.message === 'about') {
-            $scope.message = 'Du vill veta mer om mig';
         }
         eventBroadcaster.reset();
-    } 
+    }
+    
+    $scope.search = function(query) {
+        console.log($scope.search.query);
+        searchGames($scope, $http);
+    }
    
 });
 
