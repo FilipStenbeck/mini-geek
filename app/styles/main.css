@@ -4,6 +4,10 @@ ul {
     list-style-type: none !important;  
 }
 
+h4 {
+    margin-bottom: 20px;
+}
+
 .game-details-table {
     margin-top: 20px;
 }
@@ -20,7 +24,7 @@ ul {
 .game-list a   {
     width: 80%;
     height: 30px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     vertical-align: middle;
     padding-top: 14px;
 }
@@ -31,15 +35,28 @@ ul {
 
 #forum-list table tbody tr td {
     padding: 15px;
+    cursor: pointer;
 }
 
 #forum-header p {
     text-align: center;
 }
 
-#welcome-message a {
-    color: gray;
+.hero-unit {
+    background: url(../img/red-dice.png);
+    background-size:800px,603px;
+    background-repeat:no-repeat;
+    color: rgb(153, 153, 153);
+    height: 436px;
 }
+
+.lead {
+
+    color: rgb(73, 175, 205) !important;
+   
+}
+
+
 
 @media (min-width: 980px) { 
     .main-container {

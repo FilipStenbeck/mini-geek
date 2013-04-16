@@ -75,7 +75,7 @@ miniGeekApp.controller('ListCtrl', function ($scope, $http, eventBroadcaster) {
     if (eventBroadcaster.eventName === 'menuClicked') {
          $('.game-details').hide();
         if (eventBroadcaster.message === 'popular') {
-            
+              $scope.message = 'Popular Games';
             //Only get the hot game list once, then use cached version
             if (miniGeekApp.hotList.length === 0) {
                 getHotGames($scope, $http);
@@ -83,9 +83,9 @@ miniGeekApp.controller('ListCtrl', function ($scope, $http, eventBroadcaster) {
                  $scope.gameList = miniGeekApp.hotList;
             }
         } else if (eventBroadcaster.message === 'search') {
-            $scope.foo = 'Du vill söka efter spel';
+            $scope.message = 'Du vill söka efter spel';
         } else if (eventBroadcaster.message === 'about') {
-            $scope.foo = 'Du vill veta mer om mig';
+            $scope.message = 'Du vill veta mer om mig';
         }
         eventBroadcaster.reset();
     } 
