@@ -23,14 +23,15 @@
 <!-- GAME LIST  -->
 <div class="container main-container">
 	<div class="row" ng-controller="ListCtrl">
-        <div class="span12">
+        <div class="span12" style= "text-align:center;">
             <h4>{{message}} </h4>
-        </div>
-        
-        <div id="search-form" class="input-append"  style="display: none;">
+             <div id="search-form" class="input-append"  style="display: none;">
             <input class="span5 search-field" id="appendedInputButton" type="text" ng-model="search.query">
             <button class="btn" type="submit" ng-click='search()'>Search</button>
         </div>
+        </div>
+        
+       
         
         <div class="span12 game-list" ng-repeat="game in gameList">
             

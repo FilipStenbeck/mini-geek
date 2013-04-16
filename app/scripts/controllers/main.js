@@ -93,7 +93,7 @@ miniGeekApp.controller('ListCtrl', function ($scope, $http, eventBroadcaster) {
             $scope.message = 'Popular Games';
             getHotGames($scope, $http);
         } else if (eventBroadcaster.message === 'search') {
-            $scope.message = 'Search';
+            $scope.message = '';
             $('#search-form').fadeIn();
         } else if (eventBroadcaster.message === 'about') {
             $scope.message = '';
