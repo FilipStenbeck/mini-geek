@@ -182,7 +182,7 @@ miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcas
             miniGeekApp.prev_node = miniGeekApp.selected_node; 
             miniGeekApp.prev_forumHeader = $scope.forumHeader;
              miniGeekApp.selected_node = id;
-            $scope.forumHeader = '<p> ' + title +  '</p>';
+            $scope.forumHeader = '<i class="icon-arrow-up"></i>' + '<p> ' + title +  '</p>';
             getforumPosts($scope, $http);
             
         }
