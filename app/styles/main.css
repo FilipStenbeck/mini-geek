@@ -21,6 +21,7 @@ h4 {
     text-align: center;
 }
 
+
 .game-list a   {
     width: 80%;
     height: 30px;
@@ -56,10 +57,7 @@ h4 {
    
 }
 
-
-
-@media (min-width: 980px) { 
-    .main-container {
-    margin-top: 65px;
-    }
+.main-container {
+    margin-top: 50px;
 }
+
