@@ -8,6 +8,8 @@ miniGeekApp.gameId = '';
 miniGeekApp.game = {};
 miniGeekApp.forumList = [];
 miniGeekApp.selected_node = 'root';
+miniGeekApp.prev_node = 'root';
+
 
 
 miniGeekApp.resetFormList = function () {
@@ -147,7 +149,6 @@ miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcas
                      
                      }
         }).success(function (data) {
-          
             $scope.forumList = data.result;
             miniGeekApp.forumList = data.result;
         });
@@ -156,7 +157,14 @@ miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcas
     $scope.getNextForumPost = function (id, leaf) {
         if (!leaf) { 
          miniGeekApp.selected_node = id;
-        console.log("forum#" + miniGeekApp.selected_node);
+        getforumPosts($scope, $http);
+        }
+    };
+    
+      $scope.getPrevForumPost = function () {
+        if (miniGeekApp.selected_node !== 'root') { 
+        miniGeekApp.selected_node = miniGeekApp.prev_node;    
+        console.log("Last post" + miniGeekApp.prev_node);
         getforumPosts($scope, $http);
         }
     };

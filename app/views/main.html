@@ -77,7 +77,7 @@
             <div id ="video-list" class="media-body" style="display: none;">
                 <table  class="table table-bordered table-striped ">        
                     <thead> 
-                        <tr>
+                        <tr class="btn btn-block">
                             <th>Videos</th>
                          
                         </tr>
@@ -95,8 +95,8 @@
             <div id ="forum-list" class="media-body" style="display: none;">
                 <table  class="table table-bordered table-striped ">        
                      <thead> 
-                        <tr>
-                            <th ng-bind-html-unsafe="forumHeader"></th>
+                        <tr class="btn btn-block">
+                            <th ng-bind-html-unsafe="forumHeader" ng-click="getPrevForumPost()"></th>
                          
                         </tr>
                     <tbody> 

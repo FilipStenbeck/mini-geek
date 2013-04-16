@@ -29,6 +29,10 @@ ul {
     vertical-align: middle;
 }
 
+#forum-list table tbody tr td {
+    padding: 15px;
+}
+
 #welcome-message a {
     color: gray;
 }
