@@ -6,8 +6,14 @@ miniGeekApp.ROOT_URL = 'http://mini-geek-service.appspot.com/';
 miniGeekApp.hotList = [];
 miniGeekApp.gameId = '';
 miniGeekApp.game = {};
-miniGeekApp.forum = [];
+miniGeekApp.forumList = [];
+miniGeekApp.selected_node = 'root';
 
+
+miniGeekApp.resetFormList = function () {
+    miniGeekApp.forumList = [];
+    miniGeekApp.selected_node = 'root';
+};
 
  //event bus
 miniGeekApp.factory('eventBroadcaster', function ($rootScope) {
@@ -87,7 +93,13 @@ miniGeekApp.controller('ListCtrl', function ($scope, $http, eventBroadcaster) {
 
 //Game details view
 miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcaster) {
-    var getGameInfo = function ($scope, $http, id) {  
+    
+    
+    $scope.forumHeader = '<p> Forum </p>';
+    var getGameInfo = function ($scope, $http, id) {
+        
+        miniGeekApp.resetFormList();
+        
         $http({
             method : 'GET',
             url : miniGeekApp.ROOT_URL + 'gameinfo',
@@ -124,27 +136,30 @@ miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcas
     };    
     
     var getforumPosts = function ($scope, $http) {  
-        var node = 'root';
-        if (miniGeekApp.forum !== []) {
-            //Change this
-            node = 'root';
-        }
         
-        console.log("show forum for " + miniGeekApp.gameId);
+        console.log("show forum for " + miniGeekApp.gameId + " node: " +  miniGeekApp.selected_node);
         $http({
             method : 'GET',
             url : miniGeekApp.ROOT_URL + 'forumlist',
             params : {
-                        node :  node,
+                        node :  miniGeekApp.selected_node,
                         game : miniGeekApp.gameId
                      
                      }
         }).success(function (data) {
-            $('#forum-list').fadeIn();
+          
             $scope.forumList = data.result;
+            miniGeekApp.forumList = data.result;
         });
     };    
     
+    $scope.getNextForumPost = function (id, leaf) {
+        if (!leaf) { 
+         miniGeekApp.selected_node = id;
+        console.log("forum#" + miniGeekApp.selected_node);
+        getforumPosts($scope, $http);
+        }
+    };
     
     //Handlers for buttons in Game Details
     $scope.showVideos = function () {
@@ -162,7 +177,8 @@ miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcas
      $scope.showForums = function () {
         $('#video-list').hide();
         $('.overview').hide();
-        getforumPosts($scope, $http, "root");  
+        $('#forum-list').fadeIn();
+        getforumPosts($scope, $http);  
     };
 
     if (eventBroadcaster.eventName === 'showGameInfo') {
