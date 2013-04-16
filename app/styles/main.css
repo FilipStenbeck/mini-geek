@@ -33,6 +33,10 @@ ul {
     padding: 15px;
 }
 
+#forum-header p {
+    text-align: center;
+}
+
 #welcome-message a {
     color: gray;
 }

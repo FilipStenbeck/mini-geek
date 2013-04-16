@@ -96,12 +96,12 @@
                 <table  class="table table-bordered table-striped ">        
                      <thead> 
                         <tr class="btn btn-block">
-                            <th ng-bind-html-unsafe="forumHeader" ng-click="getPrevForumPost()"></th>
+                            <th id="forum-header" ng-bind-html-unsafe="forumHeader" ng-click="getPrevForumPost()"></th>
                          
                         </tr>
                     <tbody> 
                         <tr ng-repeat="post in forumList">
-                            <td ng-click='getNextForumPost(post.id, post.leaf)'><span ng-bind-html-unsafe="post.title"></span> </td>
+                            <td ng-click='getNextForumPost(post.id, post.leaf, post.title)'><span ng-bind-html-unsafe="post.title"></span> </td>
                         </tr>
                     </tbody> 
                 </table>    

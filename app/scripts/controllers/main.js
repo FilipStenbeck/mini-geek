@@ -9,7 +9,7 @@ miniGeekApp.game = {};
 miniGeekApp.forumList = [];
 miniGeekApp.prev_forumList = [];
 miniGeekApp.selected_node = 'root';
-miniGeekApp.first_node = 'root';
+miniGeekApp.prev_forumHeader = '';
 miniGeekApp.prev_node = 'root';
 
 miniGeekApp.resetFormList = function () {
@@ -153,11 +153,14 @@ miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcas
         });
     };    
     
-    $scope.getNextForumPost = function (id, leaf) {
+    $scope.getNextForumPost = function (id, leaf, title) {
         if (!leaf) { 
-            miniGeekApp.prev_node = miniGeekApp.selected_node;   
+            miniGeekApp.prev_node = miniGeekApp.selected_node; 
+            miniGeekApp.prev_forumHeader = $scope.forumHeader;
              miniGeekApp.selected_node = id;
+            $scope.forumHeader = '<p> ' + title +  '</p>';
             getforumPosts($scope, $http);
+            
         }
     };
     
@@ -166,13 +169,17 @@ miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcas
              
             if (miniGeekApp.forumList[0] === undefined) {
                 miniGeekApp.selected_node = 'root';
+                $scope.forumHeader =  '<p> Forum </p>';
             } else if (miniGeekApp.prev_forumList[0] === undefined) {
                 miniGeekApp.selected_node = 'root';
+                  $scope.forumHeader =  '<p> Forum </p>';
             } else if (miniGeekApp.forumList[0].leaf === false) {
                  miniGeekApp.selected_node = 'root';
+                  $scope.forumHeader =  '<p> Forum </p>';
             }
             else if (miniGeekApp.forumList[0].leaf === true) {
-            miniGeekApp.selected_node = miniGeekApp.prev_node; 
+                miniGeekApp.selected_node = miniGeekApp.prev_node; 
+              $scope.forumHeader =  miniGeekApp.prev_forumHeader;    
         } 
         getforumPosts($scope, $http);
         }
