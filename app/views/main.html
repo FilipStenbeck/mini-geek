@@ -25,14 +25,14 @@
         <div class="span3">
             {{foo}}
         </div>
-        <div class="span6">
-            <ul>
-                <li class="well" ng-repeat="game in gameList">
-                    <div>
-                        <a ng-click='getDetails(game.id)' href="#">{{game.name}} </a>
-                    </div>
-                </li>
-            </ul>
+        <div class="span12 game-list" ng-repeat="game in gameList">
+            
+            <a  class="btn btn-info game-list" ng-click='getDetails(game.id)' href="#">
+                <span>
+                    {{game.name}} 
+                </span>
+            </a>
+            
         </div>    
 	</div>
     
