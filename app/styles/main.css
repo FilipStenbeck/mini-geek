@@ -8,6 +8,10 @@ h4 {
     margin-bottom: 20px;
 }
 
+h1 {
+    color: rgb(153, 153, 153);
+    font-family: holtwood-one-sc, serif !important;
+}
 .game-details-table {
     margin-top: 20px;
 }
@@ -43,18 +47,21 @@ h4 {
     text-align: center;
 }
 
-.hero-unit {
-    background: url(../img/red-dice.png);
+<!--
+  background: url(../img/red-dice.png);
     background-size:800px,603px;
     background-repeat:no-repeat;
-    color: rgb(153, 153, 153);
     height: 436px;
+-->
+.hero-unit {
+    color: rgb(153, 153, 153);
     margin-top: -50px;
 }
 
 .lead {
-
-    color: rgb(73, 175, 205) !important;
+    margin-top : 10px;
+    font-family: 'Elsie Swash Caps';
+   color: rgb(153, 153, 153);
    
 }
 
