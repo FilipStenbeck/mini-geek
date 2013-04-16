@@ -7,10 +7,10 @@ miniGeekApp.hotList = [];
 miniGeekApp.gameId = '';
 miniGeekApp.game = {};
 miniGeekApp.forumList = [];
+miniGeekApp.prev_forumList = [];
 miniGeekApp.selected_node = 'root';
+miniGeekApp.first_node = 'root';
 miniGeekApp.prev_node = 'root';
-
-
 
 miniGeekApp.resetFormList = function () {
     miniGeekApp.forumList = [];
@@ -88,8 +88,7 @@ miniGeekApp.controller('ListCtrl', function ($scope, $http, eventBroadcaster) {
             $scope.foo = 'Du vill veta mer om mig';
         }
         eventBroadcaster.reset();
-    }
-    
+    } 
    
 });
 
@@ -126,7 +125,7 @@ miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcas
     };
     
     var getGameVideos = function ($scope, $http, id) {  
-        console.log("show videos for " + miniGeekApp.gameId);
+        //console.log("show videos for " + miniGeekApp.gameId);
         $http({
             method : 'GET',
             url : miniGeekApp.ROOT_URL + 'videolist',
@@ -138,8 +137,8 @@ miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcas
     };    
     
     var getforumPosts = function ($scope, $http) {  
-        
-        console.log("show forum for " + miniGeekApp.gameId + " node: " +  miniGeekApp.selected_node);
+        miniGeekApp.prev_forumList = miniGeekApp.forumList;
+      // console.log("show forum for " + miniGeekApp.gameId + " node: " +  miniGeekApp.selected_node);
         $http({
             method : 'GET',
             url : miniGeekApp.ROOT_URL + 'forumlist',
@@ -156,15 +155,25 @@ miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcas
     
     $scope.getNextForumPost = function (id, leaf) {
         if (!leaf) { 
-         miniGeekApp.selected_node = id;
-        getforumPosts($scope, $http);
+            miniGeekApp.prev_node = miniGeekApp.selected_node;   
+             miniGeekApp.selected_node = id;
+            getforumPosts($scope, $http);
         }
     };
     
       $scope.getPrevForumPost = function () {
         if (miniGeekApp.selected_node !== 'root') { 
-        miniGeekApp.selected_node = miniGeekApp.prev_node;    
-        console.log("Last post" + miniGeekApp.prev_node);
+             
+            if (miniGeekApp.forumList[0] === undefined) {
+                miniGeekApp.selected_node = 'root';
+            } else if (miniGeekApp.prev_forumList[0] === undefined) {
+                miniGeekApp.selected_node = 'root';
+            } else if (miniGeekApp.forumList[0].leaf === false) {
+                 miniGeekApp.selected_node = 'root';
+            }
+            else if (miniGeekApp.forumList[0].leaf === true) {
+            miniGeekApp.selected_node = miniGeekApp.prev_node; 
+        } 
         getforumPosts($scope, $http);
         }
     };
