@@ -17,17 +17,16 @@ ul {
     text-align: center;
 }
 
-.game-list a {
+.game-list a   {
     width: 80%;
     height: 30px;
     margin-bottom: 20px;
     vertical-align: middle;
     padding-top: 14px;
-    font-size: large;
 }
 
 .game-list a span {    
-    vertical-align:middle;
+    vertical-align: middle;
 }
 
 #welcome-message a {

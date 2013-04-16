@@ -6,6 +6,7 @@ miniGeekApp.ROOT_URL = 'http://mini-geek-service.appspot.com/';
 miniGeekApp.hotList = [];
 miniGeekApp.gameId = '';
 miniGeekApp.game = {};
+miniGeekApp.forum = [];
 
 
  //event bus
@@ -94,8 +95,10 @@ miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcas
         }).success(function (data) {
             //Clean the response
             data.result[0].link = 'http://boardgamegeek.com/boardgame/' + id;
-            data.result[0].description =   data.result[0].description.replace(/&#10;/g, " ");
-            
+            data.result[0].description =   data.result[0].description.replace(/&#10;/g, " ");  
+            data.result[0].description =   data.result[0].description.replace(/&quot;/g, " ");
+            data.result[0].description =   data.result[0].description.replace(/&ndash;/g, " ");
+
             //connect the data with the view
             $scope.details = data.result[0];
             
@@ -120,20 +123,46 @@ miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcas
         });
     };    
     
+    var getforumPosts = function ($scope, $http) {  
+        var node = 'root';
+        if (miniGeekApp.forum !== []) {
+            //Change this
+            node = 'root';
+        }
+        
+        console.log("show forum for " + miniGeekApp.gameId);
+        $http({
+            method : 'GET',
+            url : miniGeekApp.ROOT_URL + 'forumlist',
+            params : {
+                        node :  node,
+                        game : miniGeekApp.gameId
+                     
+                     }
+        }).success(function (data) {
+            $('#forum-list').fadeIn();
+            $scope.forumList = data.result;
+        });
+    };    
+    
     
     //Handlers for buttons in Game Details
     $scope.showVideos = function () {
          $('.overview').hide();
+        $('#forum-list').hide();
        getGameVideos($scope, $http, miniGeekApp.gameId);  
     };
     
      $scope.showOverivew = function () {
         $('#video-list').hide();
+        $('#forum-list').hide();
        $('.overview').fadeIn();
     };
     
      $scope.showForums = function () {
-        console.log("show forums for " + miniGeekApp.gameId);
+        $('#video-list').hide();
+        $('.overview').hide();
+        getforumPosts($scope, $http, "root");  
     };
 
     if (eventBroadcaster.eventName === 'showGameInfo') {

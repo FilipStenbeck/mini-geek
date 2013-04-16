@@ -73,7 +73,6 @@
             </div>
             
             <!-- VIDEO LIST  -->
-             
             <br>
             <div id ="video-list" class="media-body" style="display: none;">
                 <table  class="table table-bordered table-striped ">        
@@ -86,6 +85,23 @@
                     <tbody> 
                         <tr ng-repeat="video in videoList">
                             <td><a href="{{video.link}}" target="_blank"> {{video.title}}</a></td>
+                        </tr>
+                    </tbody> 
+                </table>    
+            </div>
+            
+            <!-- FORUM  -->
+            <br>
+            <div id ="forum-list" class="media-body" style="display: none;">
+                <table  class="table table-bordered table-striped ">        
+                     <thead> 
+                        <tr>
+                            <th>Forum</th>
+                         
+                        </tr>
+                    <tbody> 
+                        <tr ng-repeat="post in forumList">
+                            <td><a href="#">{{post.title}}</a></td>
                         </tr>
                     </tbody> 
                 </table>    
