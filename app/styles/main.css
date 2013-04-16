@@ -49,6 +49,7 @@ h4 {
     background-repeat:no-repeat;
     color: rgb(153, 153, 153);
     height: 436px;
+    margin-top: -50px;
 }
 
 .lead {
@@ -57,7 +58,10 @@ h4 {
    
 }
 
-.main-container {
-    margin-top: 50px;
-}
 
+
+@media (min-width: 980px) { 
+    .main-container {
+    margin-top: 65px;
+    }
+}
