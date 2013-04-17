@@ -58,9 +58,11 @@ miniGeekApp.controller('MenuCtrl', function ($scope, eventBroadcaster) {
 
 //The main view
 miniGeekApp.controller('ListCtrl', function ($scope, $http, eventBroadcaster) {
+    
     var getHotGames = function ($scope, $http) {
+          $('#loader').fadeIn();
         $http.get(miniGeekApp.ROOT_URL + 'hotgames').success(function (data) {
-            
+              $('#loader').hide();
             //Connect the data with the view and creat a gamelit cache
             $scope.gameList = data.result;
             miniGeekApp.hotList = $scope.gameList;
@@ -68,6 +70,7 @@ miniGeekApp.controller('ListCtrl', function ($scope, $http, eventBroadcaster) {
     };
     
      var searchGames = function ($scope, $http) {
+          $('#loader').fadeIn();
          $http({
             method : 'GET',
             url : miniGeekApp.ROOT_URL + 'search',
@@ -75,6 +78,7 @@ miniGeekApp.controller('ListCtrl', function ($scope, $http, eventBroadcaster) {
                         query :  $scope.search.query
                      }
         }).success(function (data) {
+             $('#loader').hide();
             //Connect the data with the view and creat a gamelit cache
             $scope.gameList = data.result;
             miniGeekApp.hotList = $scope.gameList;
@@ -160,7 +164,8 @@ miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcas
         });
     };    
     
-    var getforumPosts = function ($scope, $http) {  
+    var getforumPosts = function ($scope, $http) {
+      
         miniGeekApp.prev_forumList = miniGeekApp.forumList;
       // console.log("show forum for " + miniGeekApp.gameId + " node: " +  miniGeekApp.selected_node);
         $http({

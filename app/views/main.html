@@ -26,35 +26,33 @@
         <div class="span12" style= "text-align:center;">
             <h4>{{message}} </h4>
              <div id="search-form" class="input-append"  style="display: none;">
-            <form ng:submit='search()'> 
-                 <input class="span5 search-field" id="appendedInputButton" type="text" ng-model="search.query">
-                <button class="btn" type="submit" ng-click='search()'>Search</button>
-            </form>
-        </div>
+                <form ng:submit='search()'> 
+                     <input class="span5 search-field" id="appendedInputButton" type="text" ng-model="search.query">
+                    <button class="btn" type="submit" ng-click='search()'>Search</button>
+                </form>
+            </div>
+         <img id="loader" src="img/loader3.gif" width="42px" style="display:none;">    
         </div>
         
-       
-        
+    
         <div class="span12 game-list" ng-repeat="game in gameList">
-            
             <a  class="btn btn-info game-list" ng-click='getDetails(game.id)' href="#">
                 <span>
                     {{game.name}} 
                 </span>
             </a>
-            
+             
         </div>    
 	</div>
     
     <!-- GAME DETAILS  -->
-    <div class="row" ng-controller="GameDetailsCtrl"> 
-      
+    <div class="row" ng-controller="GameDetailsCtrl">    
         <div id="game-details" class="media" style="display: none;">
              <h4 class="media-heading">{{details.name}}</h4>
             <div class="btn-group game-details-controls">
-              <button  ng-click="showVideos()" class="btn">Videos</button>
-              <button ng-click="showOverivew()" class="btn">Overview</button>
-              <button ng-click="showForums()" class="btn">Forums</button>
+              <button  ng-click="showVideos()" class="game-details-controls-btn btn">Videos</button>
+              <button ng-click="showOverivew()" class="game-details-controls-btn btn">Overview</button>
+              <button ng-click="showForums()" class="game-details-controls-btn btn">Forums</button>
             </div>
             
             <a class="overview pull-left" href="{{details.link}}" target="_blank">

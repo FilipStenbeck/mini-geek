@@ -13,13 +13,18 @@ h1 {
     font-family: holtwood-one-sc, serif !important;
 }
 .game-details-table {
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 .game-details-controls {
     text-align: center;
     margin-bottom: 20px;
 }
+
+.game-details-controls-btn {
+     padding: 8px !important;
+}
+
 
 .game-list {
     text-align: center;
@@ -45,14 +50,21 @@ h1 {
     vertical-align: middle;
 }
 
-#forum-list table tbody tr td {
-    padding: 15px;
+td, th {
+    padding: 15px !important;
     cursor: pointer;
 }
+
+thead .btn {
+     padding: 0px !important;
+}
+
+game-details-table
 
 #forum-header p {
     text-align: center;
 }
+
 
 
 .welcome-message {
