@@ -22,7 +22,7 @@
 
 <!-- GAME LIST  -->
 <div class="container main-container">
-	<div class="row" ng-controller="ListCtrl">
+    <div class="row" ng-controller="ListCtrl">
         <div class="span12" style= "text-align:center;">
             <h4>{{message}} </h4> 
              <div id="search-form" class="input-append"  style="display: none;">
@@ -40,26 +40,24 @@
     <!-- GAME DETAILS  -->
     <div class="row" ng-controller="GameDetailsCtrl">    
         <div id="game-details" class="media" style="display: none;">
-             <h4 class="media-heading">{{details.name}}</h4>
+            <h4 class="media-heading">{{details.name}}</h4>
             <div class="btn-group game-details-controls">
-              <button  ng-click="showVideos()" class="game-details-controls-btn btn">Videos</button>
-              <button ng-click="showOverivew()" class="game-details-controls-btn btn">Overview</button>
-              <button ng-click="showForums()" class="game-details-controls-btn btn">Forums</button>
+                <button  ng-click="showVideos()" class="game-details-controls-btn btn">Videos</button>
+                <button ng-click="showOverivew()" class="game-details-controls-btn btn">Overview</button>
+                <button ng-click="showForums()" class="game-details-controls-btn btn">Forums</button>
             </div>
             
             <a class="overview pull-left" href="{{details.link}}" target="_blank">
                 <img class="media-object" src="{{details.thumbnail}}" style="margin-right: 30px;"/>
             </a>
-            <div class="overview media-body">
-               
+            <div class="overview media-body">   
                 <span>{{details.description}}</span>
-               
                 <table  class="game-details-table table table-bordered table-striped">        
                     <thead> 
                         <tr>
                             <th>Rating</th>
                             <th>Number of players</th>
-                             <th>Published</th>
+                            <th>Published</th>
                         </tr>
                     </thead>
                     <tbody> 
@@ -71,18 +69,13 @@
                     </tbody> 
                 </table>
             </div>
-            
-          
+                  
             <!-- VIDEO LIST  -->
             <video-list> </video-list>
             
             <!-- FORUM  -->
             <forum-list></forum-list>
-      </div>
-    
+            
+        </div>
     </div>    
-        
-        
-        
-        
-    
+</div>
