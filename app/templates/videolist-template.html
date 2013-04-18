@@ -1,0 +1,15 @@
+<div id ="video-list" class="media-body" style="display: none;">
+    <table  class="table table-bordered table-striped ">        
+        <thead> 
+            <tr class="btn btn-block">
+                <th>Videos</th>
+             
+            </tr>
+        </thead>
+        <tbody> 
+            <tr ng-repeat="video in videoList">
+                <td><a href="{{video.link}}" target="_blank"> {{video.title}}</a></td>
+            </tr>
+        </tbody> 
+    </table>    
+</div>

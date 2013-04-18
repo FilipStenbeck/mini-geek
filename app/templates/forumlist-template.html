@@ -1,0 +1,13 @@
+<div id ="forum-list" class="media-body" style="display: none;">
+    <table  class="table table-bordered table-striped ">        
+         <thead> 
+            <tr class="btn btn-block">
+                <th id="forum-header" ng-bind-html-unsafe="forumHeader" ng-click="getPrevForumPost()"></th>
+            </tr>
+        <tbody> 
+            <tr ng-repeat="post in forumList">
+                <td ng-click='getNextForumPost(post.id, post.leaf, post.title)'><span ng-bind-html-unsafe="post.title"></span> </td>
+            </tr>
+        </tbody> 
+    </table>    
+</div>

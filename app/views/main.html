@@ -33,7 +33,6 @@
             </div>
          <img id="loader" src="img/loader3.gif" width="42px" style="display:none;">    
         </div>
-        
         <!-- Game list directive -->
        <game-list/>
 	</div>
@@ -73,40 +72,12 @@
                 </table>
             </div>
             
+          
             <!-- VIDEO LIST  -->
-            <br>
-            <div id ="video-list" class="media-body" style="display: none;">
-                <table  class="table table-bordered table-striped ">        
-                    <thead> 
-                        <tr class="btn btn-block">
-                            <th>Videos</th>
-                         
-                        </tr>
-                    </thead>
-                    <tbody> 
-                        <tr ng-repeat="video in videoList">
-                            <td><a href="{{video.link}}" target="_blank"> {{video.title}}</a></td>
-                        </tr>
-                    </tbody> 
-                </table>    
-            </div>
+            <video-list> </video-list>
             
             <!-- FORUM  -->
-            <br>
-            <div id ="forum-list" class="media-body" style="display: none;">
-                <table  class="table table-bordered table-striped ">        
-                     <thead> 
-                        <tr class="btn btn-block">
-                            <th id="forum-header" ng-bind-html-unsafe="forumHeader" ng-click="getPrevForumPost()"></th>
-                         
-                        </tr>
-                    <tbody> 
-                        <tr ng-repeat="post in forumList">
-                            <td ng-click='getNextForumPost(post.id, post.leaf, post.title)'><span ng-bind-html-unsafe="post.title"></span> </td>
-                        </tr>
-                    </tbody> 
-                </table>    
-            </div>
+            <forum-list></forum-list>
       </div>
     
     </div>    
