@@ -24,7 +24,7 @@
 <div class="container main-container">
 	<div class="row" ng-controller="ListCtrl">
         <div class="span12" style= "text-align:center;">
-            <h4>{{message}} </h4>
+            <h4>{{message}} </h4> 
              <div id="search-form" class="input-append"  style="display: none;">
                 <form ng:submit='search()'> 
                      <input class="span5 search-field" id="appendedInputButton" type="text" ng-model="search.query">
@@ -34,15 +34,8 @@
          <img id="loader" src="img/loader3.gif" width="42px" style="display:none;">    
         </div>
         
-    
-        <div class="span12 game-list" ng-repeat="game in gameList">
-            <a  class="btn btn-info game-list" ng-click='getDetails(game.id)' href="#">
-                <span>
-                    {{game.name}} 
-                </span>
-            </a>
-             
-        </div>    
+        <!-- Game list directive -->
+       <game-list/>
 	</div>
     
     <!-- GAME DETAILS  -->

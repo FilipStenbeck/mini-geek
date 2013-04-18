@@ -1,6 +1,19 @@
 'use strict';
+
+var components =  angular.module('components', []);
+
+
 var miniGeekApp = angular.module('miniGeekApp');
 miniGeekApp.ROOT_URL = 'http://mini-geek-service.appspot.com/';
+
+miniGeekApp.directive('gameList', function () {
+    return {
+        restrict: 'E',
+        scope: false,
+        //template:  '<div class="span12 game-list" ng-repeat="game in gameList"> <a class="btn btn-info game-list" ng-click="getDetails(game.id)" href="#"> <span> foo {{game.name}} </span> </a> </div>'
+        templateUrl: 'templates/gamelist-template.html'
+        };
+    });
 
 //cached data
 miniGeekApp.hotList = [];
@@ -16,6 +29,7 @@ miniGeekApp.resetFormList = function () {
     miniGeekApp.forumList = [];
     miniGeekApp.selected_node = 'root';
 };
+
 
  //event bus
 miniGeekApp.factory('eventBroadcaster', function ($rootScope) {
@@ -58,6 +72,7 @@ miniGeekApp.controller('MenuCtrl', function ($scope, eventBroadcaster) {
 
 //The main view
 miniGeekApp.controller('ListCtrl', function ($scope, $http, eventBroadcaster) {
+    
     
     var getHotGames = function ($scope, $http) {
           $('#loader').fadeIn();
