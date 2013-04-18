@@ -20,21 +20,23 @@
 </div>
 
 
-<!-- GAME LIST  -->
+<!-- MAIN CONTAINER  -->
 <div class="container main-container">
-    <div class="row" ng-controller="ListCtrl">
+    <div class="row" ng-controller="MainCtrl">
         <div class="span12" style= "text-align:center;">
             <h4>{{message}} </h4> 
+            
              <div id="search-form" class="input-append"  style="display: none;">
                 <form ng:submit='search()'> 
                      <input class="span5 search-field" id="appendedInputButton" type="text" ng-model="search.query">
                     <button class="btn" type="submit" ng-click='search()'>Search</button>
                 </form>
             </div>
-         <img id="loader" src="img/loader3.gif" width="42px" style="display:none;">    
+            
+            <img id="loader" src="img/loader3.gif" width="42px" style="display:none;">    
         </div>
         <!-- Game list directive -->
-       <game-list/>
+       <game-list> </game-list>
 	</div>
     
     <!-- GAME DETAILS  -->
@@ -71,7 +73,7 @@
             </div>
                   
             <!-- VIDEO LIST  -->
-            <video-list> </video-list>
+            <video-list></video-list>
             
             <!-- FORUM  -->
             <forum-list></forum-list>
