@@ -1,13 +1,37 @@
 'use strict';
 
-//Create the module
+//Create the directives as an independent module
+angular.module('directives', []).directive('gameList', function () {
+    return {
+        restrict: 'E',
+        scope: false,
+        templateUrl: 'templates/gamelist-template.html'
+    };
+}).directive('videoList', function () {
+    return {
+        restrict: 'E',
+        scope: false,
+        templateUrl: 'templates/videolist-template.html'
+    };
+}).directive('forumList', function () {
+    return {
+        restrict: 'E',
+        scope: false,
+        templateUrl: 'templates/forumlist-template.html'
+    };
+});
 
-var miniGeekApp = angular.module('miniGeekApp', [])
+//Create the Main module
+var miniGeekApp = angular.module('miniGeekApp', ['directives'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MenuCtrl'
+      })
+    .when('/popular', {
+        templateUrl: 'views/main.html',
+        controller: 'PopularCtrl'
       })
       .otherwise({
         redirectTo: '/'
@@ -17,31 +41,6 @@ var miniGeekApp = angular.module('miniGeekApp', [])
 
 //Set URL to the backend service
 miniGeekApp.ROOT_URL = 'http://mini-geek-service.appspot.com/';
-
-//Define directives
-miniGeekApp.directive('gameList', function () {
-    return {
-        restrict: 'E',
-        scope: false,
-        templateUrl: 'templates/gamelist-template.html'
-    };
-});
-
-miniGeekApp.directive('videoList', function () {
-    return {
-        restrict: 'E',
-        scope: false,
-        templateUrl: 'templates/videolist-template.html'
-    };
-});
-
-miniGeekApp.directive('forumList', function () {
-    return {
-        restrict: 'E',
-        scope: false,
-        templateUrl: 'templates/forumlist-template.html'
-    };
-});
 
 //setup for cached data
 miniGeekApp.hotList = [];

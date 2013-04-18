@@ -1,16 +1,20 @@
 'use strict';
 
-//The top menu
+//The menu
 miniGeekApp.controller('MenuCtrl', function ($scope, eventBroadcaster) {
     $scope.selected = "";
-    var broadcaster = eventBroadcaster;
     $scope.setSelected = function (item) {
 		$scope.selected = item;
         if (item !== undefined) {
-            broadcaster.broadcast("menuClicked", item);
+            eventBroadcaster.broadcast("menuClicked", item);
         }
 	};
 });
+
+miniGeekApp.controller('PopularCtrl', function ($scope, eventBroadcaster) {
+    eventBroadcaster.broadcast("menuClicked", "popular");
+});
+
 
 //Main
 miniGeekApp.controller('MainCtrl', function ($scope, $http, eventBroadcaster) {
@@ -82,7 +86,7 @@ miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcas
     var getGameInfo = function ($scope, $http, id) {
         
         miniGeekApp.resetFormList();
-        
+
         $http({
             method : 'GET',
             url : miniGeekApp.ROOT_URL + 'gameinfo',
@@ -107,7 +111,6 @@ miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcas
     };
     
     var getGameVideos = function ($scope, $http, id) {
-        //console.log("show videos for " + miniGeekApp.gameId);
         $http({
             method : 'GET',
             url : miniGeekApp.ROOT_URL + 'videolist',
@@ -120,7 +123,6 @@ miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcas
     
     var getforumPosts = function ($scope, $http) {
         miniGeekApp.prev_forumList = miniGeekApp.forumList;
-      // console.log("show forum for " + miniGeekApp.gameId + " node: " +  miniGeekApp.selected_node);
         $http({
             method : 'GET',
             url : miniGeekApp.ROOT_URL + 'forumlist',
