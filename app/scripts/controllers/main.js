@@ -11,10 +11,15 @@ miniGeekApp.controller('MenuCtrl', function ($scope, eventBroadcaster) {
 	};
 });
 
+//trigger show popular games
 miniGeekApp.controller('PopularCtrl', function ($scope, eventBroadcaster) {
     eventBroadcaster.broadcast("menuClicked", "popular");
 });
 
+//trigger show game collection
+miniGeekApp.controller('CollectionCtrl', function ($scope, eventBroadcaster) {
+    eventBroadcaster.broadcast("menuClicked", "collection");
+});
 
 //Main
 miniGeekApp.controller('MainCtrl', function ($scope, $http, eventBroadcaster,  $cookies) {

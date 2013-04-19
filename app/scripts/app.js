@@ -1,7 +1,6 @@
 'use strict';
 
-
-// Provide a module that get lists of games
+// Provide a module that get lists of games from the backend server
 angular.module('GameGetterModule', []).
  
   factory('gameGetter', function() {
@@ -101,7 +100,7 @@ angular.module('GameGetterModule', []).
     };
   });
 
-//Create the custom element as an independent module
+//Create the custom elements as an independent module
 angular.module('Directives', []).directive('gameList', function () {
     return {
         restrict: 'E',
@@ -133,6 +132,10 @@ var miniGeekApp = angular.module('miniGeekApp', ['Directives', 'GameGetterModule
     .when('/popular', {
         templateUrl: 'views/main.html',
         controller: 'PopularCtrl'
+      })
+    .when('/collection', {
+        templateUrl: 'views/main.html',
+        controller: 'CollectionCtrl'
       })
       .otherwise({
         redirectTo: '/'
