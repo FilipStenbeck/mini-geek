@@ -29,9 +29,9 @@
             
              <div id="search-form" class="input-append"  style="display: none;">
                 <form ng:submit='search()'> 
-                     <input class="span5 search-field" id="appendedInputButton" type="text" ng-model="search.query">
+                     <input class="search-field" id="appendedInputButton" type="text" ng-model="search.query" required/>
                     <button class="btn" type="submit" ng-click='search()'>Search</button>
-                </form>
+                 </form>
             </div>
             
               <div id="collection-form" class="input-append"  style="display: none;">
