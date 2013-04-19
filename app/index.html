@@ -19,45 +19,29 @@
     <div class="container" ng-view></div>
     
     <!-- Welcome message-->
-   <div id="welcome-message" class=" hero-unit default-margin header">
-      <div class="container">
-          <h1>Mini Geek</h1>
-        <p class="lead">An unofficial <a href="http:///www.boardgamegeek.com" target="_top">Boardgamegeek.com</a> mobile app </p>
-      </div>
-       <div class="hidden-phone">
-        <p>Included functionality :</p>
-           <ul>
-            <li><i class="icon-ok"></i> Listing popular games</li>
-            <li><i class="icon-ok"></i> Searching for games</li>
-            <li><i class="icon-ok"></i> Listing collection</li>
-            <li><i class="icon-ok"></i> Viewing game details</li>
-            <li><i class="icon-ok"></i> Reading forum posts</li>
-            <li><i class="icon-ok"></i> Watching videos</li>
-          </ul> 
-       </div>
+    <div id="welcome-message" class=" hero-unit default-margin header">
+        <div class="container">
+            <h1>Mini Geek</h1>
+            <p class="lead">An unofficial <a href="http:///www.boardgamegeek.com" target="_top">Boardgamegeek.com</a> mobile app </p>
+        </div>
+        <div class="hidden-phone">
+            <included-list></included-list>
+        </div>
     </div>  
       
   <!-- About-->
     <div id="about" class="well well-large" style="display: none;">
-      <p>This is a Mobile Web App for browsing boardgames on <a href="http://www.boardgamegeek.com/">boardgamegeek.com</a> </p>
+        <p>This is a Mobile Web App for browsing boardgames on <a href="http://www.boardgamegeek.com/">boardgamegeek.com</a> </p>
     
-      <p>The app includes functionality for:</p>
-       <ul>
-        <li><i class="icon-ok"></i> Listing popular games</li>
-        <li><i class="icon-ok"></i> Searching for games</li>
-        <li><i class="icon-ok"></i> Listing game collection</li>
-        <li><i class="icon-ok"></i> Viewing game details</li>
-        <li><i class="icon-ok"></i> Reading forum posts</li>
-        <li><i class="icon-ok"></i> Watching game videos [youtube]</li>
-      </ul> 
+        <included-list></included-list>
     
-      <p>Contact information and source code  :</p>
-      <p>
-        <a href="http://boardgamegeek.com/user/efilips" target="top"><img src="img/Geek_Head.png" width="65px"></a>
-        <a href="https://twitter.com/FilipStenbeck" target="top"><img src="img/twitter-bird-light-bgs.png" width="65px"></a>
-        <a href="http://www.linkedin.com/profile/view?id=12116865&amp;trk" target="top"><img src="img/LinkedInButton.png" width="55px"></a> &nbsp; 
-        <a href="https://github.com/FilipStenbeck/mini-geek/" target="top"><img src="img/github-logo-transparent.png" width="65px"></a>
-      </p>
+        <p>Contact information and source code  :</p>
+        <p>
+            <a href="http://boardgamegeek.com/user/efilips" target="top"><img src="img/Geek_Head.png" width="65px"></a>
+            <a href="https://twitter.com/FilipStenbeck" target="top"><img src="img/twitter-bird-light-bgs.png" width="65px"></a>
+            <a href="http://www.linkedin.com/profile/view?id=12116865&amp;trk" target="top"><img src="img/LinkedInButton.png" width="55px"></a> &nbsp; 
+            <a href="https://github.com/FilipStenbeck/mini-geek/" target="top"><img src="img/github-logo-transparent.png" width="65px"></a>
+        </p>
     </div>
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

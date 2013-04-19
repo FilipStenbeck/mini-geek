@@ -119,6 +119,12 @@ angular.module('Directives', []).directive('gameList', function () {
         scope: false,
         templateUrl: 'templates/forumlist-template.html'
     };
+}).directive('includedList', function () {
+    return {
+        restrict: 'E',
+        scope: false,
+        templateUrl: 'templates/included-template.html'
+    };
 });
 
 //Create the Main module
