@@ -18,7 +18,7 @@ miniGeekApp.controller('PopularCtrl', function ($scope, eventBroadcaster) {
 
 //Main
 miniGeekApp.controller('MainCtrl', function ($scope, $http, eventBroadcaster,  $cookies) {
-    
+    //get cookie
     window.cookies = $cookies;
     $scope.cookieValue = $cookies;
     
@@ -36,15 +36,16 @@ miniGeekApp.controller('MainCtrl', function ($scope, $http, eventBroadcaster,  $
         eventBroadcaster.broadcast("showGameInfo", id);
     };
     
-     //handle search button clicked
+     //handle click event on search  and collection buttons
     $scope.search = function (query) {
         gameGetter.searchGames($scope, $http);
     };
     
-    //handle search button clicked
     $scope.collection = function () {
+        //Set cookie
         window.cookies = $cookies;
         $cookies.username = $scope.username;
+        
         gameGetter.getCollection($scope, $http);
     };
     
@@ -62,7 +63,7 @@ miniGeekApp.controller('MainCtrl', function ($scope, $http, eventBroadcaster,  $
         } else if (eventBroadcaster.message === 'collection') {
             $scope.message = 'Game collection';
             $('#collection-form').fadeIn(); 
-            
+            //got username from cookie so get colllection automatic
             if ($scope.username !== undefined && $scope.username !== '') {
                 $scope.collection();
             }
@@ -70,7 +71,7 @@ miniGeekApp.controller('MainCtrl', function ($scope, $http, eventBroadcaster,  $
             $scope.message = '';
             $('#about').fadeIn();
         } else if (eventBroadcaster.message === 'history') {
-            //Only get the game list once, then use cached version from perevious serch or popular list
+            //Only get the game list once, then use cached version from previous serch, collection or popular list
             if (miniGeekApp.hotList.length === 0) {
                 gameGetter.getHotGames($scope, $http);
             } else {
