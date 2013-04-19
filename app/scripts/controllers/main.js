@@ -17,8 +17,15 @@ miniGeekApp.controller('PopularCtrl', function ($scope, eventBroadcaster) {
 
 
 //Main
-miniGeekApp.controller('MainCtrl', function ($scope, $http, eventBroadcaster) {
-
+miniGeekApp.controller('MainCtrl', function ($scope, $http, eventBroadcaster,  $cookies) {
+    
+    window.cookies = $cookies;
+    $scope.cookieValue = $cookies;
+    
+    if ($cookies.username !== undefined) {
+        $scope.username = $cookies.username;
+    }
+    
     //Inject the game getter module
     var injector = angular.injector(['GameGetterModule']);
     var gameGetter = injector.get('gameGetter');
@@ -28,6 +35,19 @@ miniGeekApp.controller('MainCtrl', function ($scope, $http, eventBroadcaster) {
         miniGeekApp.gameId = id;
         eventBroadcaster.broadcast("showGameInfo", id);
     };
+    
+     //handle search button clicked
+    $scope.search = function (query) {
+        gameGetter.searchGames($scope, $http);
+    };
+    
+    //handle search button clicked
+    $scope.collection = function () {
+        window.cookies = $cookies;
+        $cookies.username = $scope.username;
+        gameGetter.getCollection($scope, $http);
+    };
+    
         
     //handle event broadcasted from the menu
     if (eventBroadcaster.eventName === 'menuClicked') {
@@ -39,6 +59,13 @@ miniGeekApp.controller('MainCtrl', function ($scope, $http, eventBroadcaster) {
         } else if (eventBroadcaster.message === 'search') {
             $scope.message = 'Search for games';
             $('#search-form').fadeIn();
+        } else if (eventBroadcaster.message === 'collection') {
+            $scope.message = 'Game collection';
+            $('#collection-form').fadeIn(); 
+            
+            if ($scope.username !== undefined && $scope.username !== '') {
+                $scope.collection();
+            }
         } else if (eventBroadcaster.message === 'about') {
             $scope.message = '';
             $('#about').fadeIn();
@@ -52,11 +79,6 @@ miniGeekApp.controller('MainCtrl', function ($scope, $http, eventBroadcaster) {
         }
         eventBroadcaster.reset();
     }
-    
-    //handle search button clicked
-    $scope.search = function (query) {
-        gameGetter.searchGames($scope, $http);
-    };
    
 });
 

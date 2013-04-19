@@ -12,7 +12,8 @@
                <ul class="nav">
                     <li><a ng-click="setSelected('popular')" href="#">Popular games</a></li>
                     <li><a ng-click="setSelected('search')" href="#">Search games</a></li>
-                    <li><a ng-click="setSelected('about')" href="#">About</a></li>
+                    <li><a ng-click="setSelected('collection')" href="#">Game collection</a></li>
+                   <li><a ng-click="setSelected('about')" href="#">About</a></li>
 				</ul>
            </div>
        </div>
@@ -30,6 +31,13 @@
                 <form ng:submit='search()'> 
                      <input class="span5 search-field" id="appendedInputButton" type="text" ng-model="search.query">
                     <button class="btn" type="submit" ng-click='search()'>Search</button>
+                </form>
+            </div>
+            
+              <div id="collection-form" class="input-append"  style="display: none;">
+                <form ng:submit='collection()'> 
+                     <input class="span5  search-field" id="appendedInputButton" type="text" ng-model="username" text="collection.username" placeholder="username">
+                    <button class="btn" type="submit" ng-click='collection()'>Ok</button>
                 </form>
             </div>
             

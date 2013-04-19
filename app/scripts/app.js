@@ -33,6 +33,21 @@ angular.module('GameGetterModule', []).
                 miniGeekApp.hotList = $scope.gameList;
             });
         },
+        getCollection : function ($scope, $http) {
+            $('#loader').fadeIn();
+            $http({
+                method : 'GET',
+                url : miniGeekApp.ROOT_URL + 'collection',
+                params : {
+                    username :  $scope.username
+                }
+            }).success(function (data) {
+                $('#loader').hide();
+                //Connect the data with the view and creat a gamelit cache
+                $scope.gameList = data.result;
+                miniGeekApp.hotList = $scope.gameList;
+            });
+        },  
           
         getGameInfo : function ($scope, $http, id) {
         
@@ -108,7 +123,7 @@ angular.module('Directives', []).directive('gameList', function () {
 });
 
 //Create the Main module
-var miniGeekApp = angular.module('miniGeekApp', ['Directives', 'GameGetterModule'])
+var miniGeekApp = angular.module('miniGeekApp', ['Directives', 'GameGetterModule', 'ngCookies'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
