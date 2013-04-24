@@ -11,8 +11,8 @@ describe('Service: GeekService', function () {
     GeekService = _GeekService_;
   }));
 
-  it('should do something', function () {
-    expect(!!GeekService).toBe(true);
+  it('should have the right URL to backend service', function () {
+    expect(GeekService.ROOT_URL).toBe('http://mini-geek-service.appspot.com/');
   });
 
 });

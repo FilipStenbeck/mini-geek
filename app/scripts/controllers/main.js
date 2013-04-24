@@ -1,28 +1,28 @@
 'use strict';
 
 //The menu
-miniGeekApp.controller('MenuCtrl', function ($scope, eventBroadcaster) {
+angular.module('miniGeekApp').controller('MenuCtrl', function ($scope, EventBroadcaster) {
     $scope.selected = "";
     $scope.setSelected = function (item) {
 		$scope.selected = item;
         if (item !== undefined) {
-            eventBroadcaster.broadcast("menuClicked", item);
+            EventBroadcaster.broadcast("menuClicked", item);
         }
 	};
 });
 
 //trigger show popular games
-miniGeekApp.controller('PopularCtrl', function ($scope, eventBroadcaster) {
-    eventBroadcaster.broadcast("menuClicked", "popular");
+angular.module('miniGeekApp').controller('PopularCtrl', function ($scope, EventBroadcaster) {
+    EventBroadcaster.broadcast("menuClicked", "popular");
 });
 
 //trigger show game collection
-miniGeekApp.controller('CollectionCtrl', function ($scope, eventBroadcaster) {
-    eventBroadcaster.broadcast("menuClicked", "collection");
+angular.module('miniGeekApp').controller('CollectionCtrl', function ($scope, EventBroadcaster) {
+    EventBroadcaster.broadcast("menuClicked", "collection");
 });
 
 //Main
-miniGeekApp.controller('MainCtrl', function ($scope, $http, eventBroadcaster,  $cookies, GeekService) {
+angular.module('miniGeekApp').controller('MainCtrl', function ($scope, $http, EventBroadcaster,  $cookies, GeekService) {
     //get cookie
     window.cookies = $cookies;
     $scope.cookieValue = $cookies;
@@ -34,8 +34,8 @@ miniGeekApp.controller('MainCtrl', function ($scope, $http, eventBroadcaster,  $
     
     //function for showing game information on the clicked listed game
     $scope.getDetails = function (id) {
-        miniGeekApp.gameId = id;
-        eventBroadcaster.broadcast("showGameInfo", id);
+        GeekService.gameId = id;
+        EventBroadcaster.broadcast("showGameInfo", id);
     };
     
      //handle click event on search  and collection buttons
@@ -53,50 +53,50 @@ miniGeekApp.controller('MainCtrl', function ($scope, $http, eventBroadcaster,  $
     
         
     //handle event broadcasted from the menu
-    if (eventBroadcaster.eventName === 'menuClicked') {
+    if (EventBroadcaster.eventName === 'menuClicked') {
         $('.game-details').hide();
         $('#about').hide();
-        if (eventBroadcaster.message === 'popular') {
+        if (EventBroadcaster.message === 'popular') {
             $scope.message = 'Popular Games';
             GeekService.getHotGames($scope, $http);
             
             
-        } else if (eventBroadcaster.message === 'search') {
+        } else if (EventBroadcaster.message === 'search') {
             $scope.message = 'Search for games';
             $('#search-form').fadeIn();
-        } else if (eventBroadcaster.message === 'collection') {
+        } else if (EventBroadcaster.message === 'collection') {
             $scope.message = 'Game collection';
             $('#collection-form').fadeIn(); 
             //got username from cookie so get colllection automatic
             if ($scope.username !== undefined && $scope.username !== '') {
                 $scope.collection();
             }
-        } else if (eventBroadcaster.message === 'about') {
+        } else if (EventBroadcaster.message === 'about') {
             $scope.message = '';
             $('#about').fadeIn();
-        } else if (eventBroadcaster.message === 'history') {
+        } else if (EventBroadcaster.message === 'history') {
             //Only get the game list once, then use cached version from previous serch, collection or popular list
-            if (miniGeekApp.hotList.length === 0) {
+            if (GeekService.hotList.length === 0) {
                 GeekService.getHotGames($scope, $http);
             } else {
-                $scope.gameList = miniGeekApp.hotList;
+                $scope.gameList = GeekService.hotList;
             }
         }
-        eventBroadcaster.reset();
+        EventBroadcaster.reset();
     }
    
 });
 
 //Game details view
-miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcaster, GeekService) {
+angular.module('miniGeekApp').controller('GameDetailsCtrl', function ($scope, $http, EventBroadcaster, GeekService) {
   
     $scope.forumHeader = '<p> Forum </p>';
     
     $scope.getNextForumPost = function (id, leaf, title) {
         if (!leaf) {
-            miniGeekApp.prev_node = miniGeekApp.selected_node;
-            miniGeekApp.prev_forumHeader = $scope.forumHeader;
-            miniGeekApp.selected_node = id;
+            GeekService.prev_node = GeekService.selected_node;
+            GeekService.prev_forumHeader = $scope.forumHeader;
+            GeekService.selected_node = id;
             $scope.forumHeader = '<i class="icon-arrow-up"></i>' + '<p> ' + title +  '</p>';
             GeekService.getforumPosts($scope, $http);
             
@@ -104,19 +104,19 @@ miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcas
     };
     
     $scope.getPrevForumPost = function () {
-        if (miniGeekApp.selected_node !== 'root') {
-            if (miniGeekApp.forumList[0] === undefined) {
-                miniGeekApp.selected_node = 'root';
+        if (GeekService.selected_node !== 'root') {
+            if (GeekService.forumList[0] === undefined) {
+                GeekService.selected_node = 'root';
                 $scope.forumHeader =  '<p> Forum </p>';
-            } else if (miniGeekApp.prev_forumList[0] === undefined) {
-                miniGeekApp.selected_node = 'root';
+            } else if (GeekService.prev_forumList[0] === undefined) {
+                GeekService.selected_node = 'root';
                 $scope.forumHeader =  '<p> Forum </p>';
-            } else if (miniGeekApp.forumList[0].leaf === false) {
-                miniGeekApp.selected_node = 'root';
+            } else if (GeekService.forumList[0].leaf === false) {
+                GeekService.selected_node = 'root';
                 $scope.forumHeader =  '<p> Forum </p>';
-            } else if (miniGeekApp.forumList[0].leaf === true) {
-                miniGeekApp.selected_node = miniGeekApp.prev_node;
-                $scope.forumHeader =  miniGeekApp.prev_forumHeader;
+            } else if (GeekService.forumList[0].leaf === true) {
+                GeekService.selected_node = GeekService.prev_node;
+                $scope.forumHeader =  GeekService.prev_forumHeader;
             }
             GeekService.getforumPosts($scope, $http);
         }
@@ -126,7 +126,7 @@ miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcas
     $scope.showVideos = function () {
         $('.overview').hide();
         $('#forum-list').hide();
-        GeekService.getGameVideos($scope, $http, miniGeekApp.gameId);
+        GeekService.getGameVideos($scope, $http, GeekService.gameId);
     };
     
     $scope.showOverivew = function () {
@@ -142,9 +142,9 @@ miniGeekApp.controller('GameDetailsCtrl', function ($scope, $http, eventBroadcas
         GeekService.getforumPosts($scope, $http);
     };
 
-    if (eventBroadcaster.eventName === 'showGameInfo') {
-        miniGeekApp.resetFormList();
-        GeekService.getGameInfo($scope, $http, eventBroadcaster.message);
-        eventBroadcaster.reset();
+    if (EventBroadcaster.eventName === 'showGameInfo') {
+        GeekService.resetFormList();
+        GeekService.getGameInfo($scope, $http, EventBroadcaster.message);
+        EventBroadcaster.reset();
     }
 });
