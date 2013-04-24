@@ -8,7 +8,7 @@ files = [
   JASMINE,
   JASMINE_ADAPTER,
   'app/components/angular/angular.js',
-  'https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular-cookies.min.js', 
+  'app/components/angular-cookies/angular-cookies.min.js', 
   'app/components/angular-mocks/angular-mocks.js',
   'app/scripts/*.js',
   'app/scripts/**/*.js',
