@@ -28,52 +28,44 @@ angular.module('miniGeekApp')
             this.selected_node = 'root';
         },  
         
-       getHotGames : function ($scope, $http) {
-            $('#loader').fadeIn();
+       getHotGames : function ($http, callback) {
            var that = this;
             $http.get(this.ROOT_URL + 'hotgames').success(function (data) {
-                $('#loader').hide();
-                
-                //Connect the data with the view and creat a gamelit cache
-                $scope.gameList = data.result;
-                that.hotList = $scope.gameList;
+                //keep a cache of latest response
+                that.hotList = data.result;
+                callback(data);
             });
         },
     
-        searchGames : function ($scope, $http) {
+        searchGames : function (query, $http, callback) {
             var that = this;
-            $('#loader').fadeIn();
             $http({
                 method : 'GET',
                 url : that.ROOT_URL + 'search',
                 params : {
-                    query :  $scope.search.query
+                    query :  query
                 }
             }).success(function (data) {
-                $('#loader').hide();
-                //Connect the data with the view and creat a gamelit cache
-                $scope.gameList = data.result;
-                that.hotList = $scope.gameList;
+                //keep a cache of latest response
+                that.hotList = data.result;
+                callback(data);
             });
         },
-        getCollection : function ($scope, $http) {
+        getCollection : function (username, $http, callback) {
             var that = this;
-            $('#loader').fadeIn();
             $http({
                 method : 'GET',
                 url : that.ROOT_URL + 'collection',
                 params : {
-                    username :  $scope.username
+                    username :  username
                 }
             }).success(function (data) {
-                $('#loader').hide();
-                //Connect the data with the view and creat a gamelit cache
-                $scope.gameList = data.result;
-                that.hotList = $scope.gameList;
+                that.hotList =  data.result;
+                callback(data);
             });
         },  
           
-        getGameInfo : function ($scope, $http, id) {
+        getGameInfo : function ($http, id, callback) {
             var that = this;
             $http({
                 method : 'GET',
@@ -85,15 +77,11 @@ angular.module('miniGeekApp')
                 data.result[0].description =   data.result[0].description.replace(/&#10;/g, " ");
                 data.result[0].description =   data.result[0].description.replace(/&quot;/g, " ");
                 data.result[0].description =   data.result[0].description.replace(/&ndash;/g, " ");
-    
-                //connect the data with the view
-                $scope.details = data.result[0];
                 
                 //Keep a cashed list of game
                 that.game = data.result[0];
                 
-                  //Show the details
-                $('#game-details').fadeIn();
+                callback(data);
                 
             });
         },
