@@ -2,14 +2,9 @@
 
 angular.module('miniGeekApp')
   .factory('GeekService', function () {
-    // Internal Service logic
-    
-      var meaningOfLife = 42;
 
-    // Public API here
     return {
         
-        that : this,
         //Set URL to the backend service
        ROOT_URL : 'http://mini-geek-service.appspot.com/',
         
@@ -80,23 +75,21 @@ angular.module('miniGeekApp')
                 
                 //Keep a cashed list of game
                 that.game = data.result[0];
-                
                 callback(data);
                 
             });
         },
-        getGameVideos : function ($scope, $http, id) {
+        getGameVideos : function ($http, id, callback) {
             var that = this;
             $http({
                 method : 'GET',
                 url : that.ROOT_URL + 'videolist',
                 params : {id : id}
             }).success(function (data) {
-                $('#video-list').fadeIn();
-                $scope.videoList = data.result;
+                callback(data);
             });
         },
-        getforumPosts : function ($scope, $http) {
+        getforumPosts : function ($http, callback) {
             var that = this;
             that.prev_forumList = that.forumList;
             $http({
@@ -108,8 +101,8 @@ angular.module('miniGeekApp')
                          
                 }
             }).success(function (data) {
-                $scope.forumList = data.result;
                 that.forumList = data.result;
+                callback(data);
             });
         }  
     };

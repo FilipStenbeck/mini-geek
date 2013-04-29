@@ -35,16 +35,7 @@ angular.module('miniGeekApp', ['Directives', 'ngCookies'])
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MenuCtrl'
-      })
-    .when('/popular', {
-        templateUrl: 'views/main.html',
-        controller: 'PopularCtrl'
-      })
-    .when('/collection', {
-        templateUrl: 'views/main.html',
-        controller: 'CollectionCtrl'
-      })
-      .otherwise({
+      }).otherwise({
         redirectTo: '/'
       });
   });

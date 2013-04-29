@@ -15,7 +15,6 @@ angular.module('miniGeekApp')
 
     // This method broadcasts an event with the specified name.
     eventBroadcaster.broadcastItem = function () {
-        $('#welcome-message').fadeOut('slow');
         $rootScope.$broadcast(this.eventName);
     };
     
