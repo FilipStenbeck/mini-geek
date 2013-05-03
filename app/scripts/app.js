@@ -29,15 +29,13 @@ angular.module('Directives', []).directive('gameList', function () {
 });
 
 //Create the Main module
-angular.module('miniGeekApp', ['Directives', 'ngCookies'])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
+angular.module('miniGeekApp', ['Directives', 'ngCookies']).config(function ($routeProvider) {
+    $routeProvider.when('/', {
         templateUrl: 'views/main.html',
         controller: 'MenuCtrl'
-      }).otherwise({
+    }).otherwise({
         redirectTo: '/'
-      });
-  });
+    });
+});
 
 

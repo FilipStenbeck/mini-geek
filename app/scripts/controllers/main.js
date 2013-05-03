@@ -1,10 +1,10 @@
 'use strict';
 
 //The menu controller
-angular.module('miniGeekApp').controller('MenuCtrl', function ($scope, EventBroadcaster) {
-    $scope.selected = "";
+angular.module('miniGeekApp').controller('MenuCtrl', function ($scope, EventBroadcaster, UiService) {
+   
     $scope.setSelected = function (item) {
-        $('#welcome-message').fadeOut('slow');
+        UiService.hideWelcomeMsg();
 		$scope.selected = item;
         if (item !== undefined) {
             EventBroadcaster.broadcast("menuClicked", item);
@@ -13,18 +13,16 @@ angular.module('miniGeekApp').controller('MenuCtrl', function ($scope, EventBroa
 });
 
 //Main controller
-angular.module('miniGeekApp').controller('MainCtrl', function ($scope, $http, EventBroadcaster,  $cookies, GeekService) {
+angular.module('miniGeekApp').controller('MainCtrl', function ($scope, $http, EventBroadcaster,  $cookies, GeekService, UiService) {
     
-     //Define a callback for the loading data service
+     //Define a callback for the loading game services
     var updateGameList = function (data) {
-        $('#loader').hide();
+        UiService.stopSpinner();
         $scope.gameList = data.result;
-    }
-    
+    };
+
     //get cookie
-    window.cookies = $cookies;
     $scope.cookieValue = $cookies;
-    
     if ($cookies.username !== undefined) {
         $scope.username = $cookies.username;
     }
@@ -37,44 +35,41 @@ angular.module('miniGeekApp').controller('MainCtrl', function ($scope, $http, Ev
     
      //handle click event on search  and collection buttons
     $scope.search = function (query) {
-        $('#loader').fadeIn();
+        UiService.startSpinner();
         GeekService.searchGames($scope.search.query, $http, updateGameList);
     };
     
     $scope.collection = function () {
-        $('#loader').fadeIn();
         //Set cookie
-        window.cookies = $cookies;
         $cookies.username = $scope.username;
-        GeekService.getCollection($scope.username, $http,updateGameList);
+        UiService.startSpinner();
+        GeekService.getCollection($scope.username, $http, updateGameList);
     };
     
     //handle event broadcasted from the menu
     if (EventBroadcaster.eventName === 'menuClicked') {
-        $('.game-details').hide();
-        $('#about').hide();
+        //$('.game-details').hide();
         if (EventBroadcaster.message === 'popular') {
             $scope.message = 'Popular Games';
-            $('#loader').fadeIn();
-            GeekService.getHotGames($http,updateGameList);
-            
+            UiService.startSpinner();
+            GeekService.getHotGames($http, updateGameList);
         } else if (EventBroadcaster.message === 'search') {
             $scope.message = 'Search for games';
-            $('#search-form').fadeIn();
+            UiService.showForm('#search-form');
         } else if (EventBroadcaster.message === 'collection') {
             $scope.message = 'Game collection';
-            $('#collection-form').fadeIn(); 
+            UiService.showForm('#collection-form');
             //got username from cookie so get colllection automatic
             if ($scope.username !== undefined && $scope.username !== '') {
                 $scope.collection();
             }
         } else if (EventBroadcaster.message === 'about') {
             $scope.message = '';
-            $('#about').fadeIn();
+            UiService.showForm('#about');
         } else if (EventBroadcaster.message === 'history') {
             //Only get the game list once, then use cached version from previous serch, collection or popular list
             if (GeekService.hotList.length === 0) {
-                $('#loader').fadeIn();
+                UiService.startSpinner();
                 GeekService.getHotGames($http, updateGameList);
             } else {
                 $scope.gameList = GeekService.hotList;
@@ -85,11 +80,11 @@ angular.module('miniGeekApp').controller('MainCtrl', function ($scope, $http, Ev
 });
 
 //Game details controller
-angular.module('miniGeekApp').controller('GameDetailsCtrl', function ($scope, $http, EventBroadcaster, GeekService) {
+angular.module('miniGeekApp').controller('GameDetailsCtrl', function ($scope, $http, EventBroadcaster, GeekService, UiService) {
     
-    var updateForum = function(data) {
-           $scope.forumList = data.result;
-    }
+    var updateForum = function (data) {
+        $scope.forumList = data.result;
+    };
     
     $scope.forumHeader = '<p> Forum </p>';
     
@@ -99,7 +94,7 @@ angular.module('miniGeekApp').controller('GameDetailsCtrl', function ($scope, $h
             GeekService.prev_forumHeader = $scope.forumHeader;
             GeekService.selected_node = id;
             $scope.forumHeader = '<i class="icon-arrow-up"></i>' + '<p> ' + title +  '</p>';
-            GeekService.getforumPosts($http,updateForum);
+            GeekService.getforumPosts($http, updateForum);
             
         }
     };
@@ -119,38 +114,32 @@ angular.module('miniGeekApp').controller('GameDetailsCtrl', function ($scope, $h
                 GeekService.selected_node = GeekService.prev_node;
                 $scope.forumHeader =  GeekService.prev_forumHeader;
             }
-            GeekService.getforumPosts($http,updateForum);
+            GeekService.getforumPosts($http, updateForum);
         }
     };
     
     //Handlers for buttons in Game Details
     $scope.showVideos = function () {
-        $('.overview').hide();
-        $('#forum-list').hide();
-        GeekService.getGameVideos($http, GeekService.gameId, function(data) {
-            $('#video-list').fadeIn();
+        GeekService.getGameVideos($http, GeekService.gameId, function (data) {
+            UiService.showVideoList();
             $scope.videoList = data.result;
         });
     };
     
     $scope.showOverivew = function () {
-        $('#video-list').hide();
-        $('#forum-list').hide();
-        $('.overview').fadeIn();
+        UiService.showGameOverview();
     };
     
     $scope.showForums = function () {
-        $('#video-list').hide();
-        $('.overview').hide();
-        $('#forum-list').fadeIn();
-        GeekService.getforumPosts($http,updateForum);
+        UiService.showForum();
+        GeekService.getforumPosts($http, updateForum);
     };
 
     if (EventBroadcaster.eventName === 'showGameInfo') {
         GeekService.resetFormList();
         GeekService.getGameInfo($http, EventBroadcaster.message, function (data) {
-            $scope.details = data.result[0];        
-            $('#game-details').fadeIn();
+            $scope.details = data.result[0];
+            UiService.showGameDetails();
         });
         EventBroadcaster.reset();
     }
