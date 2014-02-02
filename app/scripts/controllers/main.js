@@ -5,12 +5,40 @@ angular.module('miniGeekApp').controller('MenuCtrl', function ($scope, EventBroa
    
     $scope.setSelected = function (item) {
         UiService.hideWelcomeMsg();
-		$scope.selected = item;
+        $scope.selected = item;
+        /**
         if (item !== undefined) {
             EventBroadcaster.broadcast("menuClicked", item);
         }
+        */
 	};
 });
+
+//Search form
+angular.module('miniGeekApp').controller('StartSearchCtrl', function ($scope, EventBroadcaster, UiService) {
+    UiService.hideWelcomeMsg();
+    EventBroadcaster.broadcast("menuClicked", 'search');
+});
+
+//hotgame form
+angular.module('miniGeekApp').controller('PopularCtrl', function ($scope, EventBroadcaster, UiService) {
+    UiService.hideWelcomeMsg();
+    EventBroadcaster.broadcast("menuClicked", 'popular');
+});
+
+//Collection form
+angular.module('miniGeekApp').controller('CollectionCtrl', function ($scope, EventBroadcaster, UiService) {
+    UiService.hideWelcomeMsg();
+    EventBroadcaster.broadcast("menuClicked", 'collection');
+});
+
+//About
+angular.module('miniGeekApp').controller('AboutCtrl', function ($scope, EventBroadcaster, UiService) {
+    UiService.hideWelcomeMsg();
+    EventBroadcaster.broadcast("menuClicked", 'about');
+});
+
+
 
 //Main controller
 angular.module('miniGeekApp').controller('MainCtrl', function ($scope, $http, EventBroadcaster,  $cookies, GeekService, UiService) {

@@ -11,22 +11,22 @@ angular.module('miniGeekApp').factory('UiService', function () {
             $('#loader').show();
         },
         showGameDetails : function () {
-            $('#game-details').fadeIn();
+            $('#game-details').show();
         },
         showGameOverview : function () {
             $('#video-list').hide();
             $('#forum-list').hide();
-            $('.overview').fadeIn();
+            $('.overview').show();
         },
         showForum : function () {
             $('#video-list').hide();
             $('.overview').hide();
-            $('#forum-list').fadeIn();
+            $('#forum-list').show();
         },
         showVideoList : function () {
             $('.overview').hide();
             $('#forum-list').hide();
-            $('#video-list').fadeIn();
+            $('#video-list').show();
         },
         showForm : function (id) {
             this.hideForum('#about');
@@ -36,8 +36,8 @@ angular.module('miniGeekApp').factory('UiService', function () {
             $(id).hide();
         },
         hideWelcomeMsg : function () {
-            $('#about').fadeOut('slow');
-            $('#welcome-message').fadeOut('slow');
+            $('#about').hide();
+            $('#welcome-message').hide();
         }
     };
 });

@@ -25,11 +25,18 @@ angular.module('miniGeekApp')
         
        getHotGames : function ($http, callback) {
            var that = this;
+            if (that.hotList.length === 0) {
+
             $http.get(this.ROOT_URL + 'hotgames').success(function (data) {
                 //keep a cache of latest response
                 that.hotList = data.result;
                 callback(data);
             });
+        } else {
+            var data = {};
+            data.result = that.hotList;
+            callback (data);
+        }
         },
     
         searchGames : function (query, $http, callback) {
@@ -41,8 +48,6 @@ angular.module('miniGeekApp')
                     query :  query
                 }
             }).success(function (data) {
-                //keep a cache of latest response
-                that.hotList = data.result;
                 callback(data);
             });
         },
