@@ -6,11 +6,6 @@ angular.module('miniGeekApp').controller('MenuCtrl', function ($scope, EventBroa
     $scope.setSelected = function (item) {
         UiService.hideWelcomeMsg();
         $scope.selected = item;
-        /**
-        if (item !== undefined) {
-            EventBroadcaster.broadcast("menuClicked", item);
-        }
-        */
 	};
 });
 
@@ -41,7 +36,7 @@ angular.module('miniGeekApp').controller('AboutCtrl', function ($scope, EventBro
 
 
 //Main controller
-angular.module('miniGeekApp').controller('MainCtrl', function ($scope, $http, EventBroadcaster,  $cookies, GeekService, UiService) {
+angular.module('miniGeekApp').controller('MainCtrl', function ($scope, $http, $routeParams, $location, EventBroadcaster,  $cookies, GeekService, UiService) {
     
      //Define a callback for the loading game services
     var updateGameList = function (data) {
@@ -73,6 +68,12 @@ angular.module('miniGeekApp').controller('MainCtrl', function ($scope, $http, Ev
         UiService.startSpinner();
         GeekService.getCollection($scope.username, $http, updateGameList);
     };
+
+     //Routing directly to gameInfo
+    if ($routeParams && $routeParams.gameId) {
+        UiService.hideWelcomeMsg();
+        $scope.getDetails($routeParams.gameId);
+    }
     
     //handle event broadcasted from the menu
     if (EventBroadcaster.eventName === 'menuClicked') {

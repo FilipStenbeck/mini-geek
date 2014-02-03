@@ -45,6 +45,9 @@ angular.module('miniGeekApp', ['Directives', 'ngCookies']).config(function ($rou
     }).when('/collection', {
         templateUrl: 'views/main.html',
         controller: 'CollectionCtrl'
+    }).when('/game/:gameId', {
+        templateUrl: 'views/main.html',
+        controller: 'MainCtrl'
     }).otherwise({
         redirectTo: '/'
     });
