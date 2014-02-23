@@ -10,6 +10,15 @@ h1 {
     color: rgb(153, 153, 153);
     font-family: holtwood-one-sc, serif !important;
 }
+
+.navbar-inner {
+   
+}
+
+.navbar .btn-navbar .icon-bar {
+    width: 20px;
+    height: 3px;
+}
 .game-details-table {
     margin-top: 40px;
 }
