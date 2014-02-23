@@ -1,7 +1,7 @@
 'use strict';
 
 //Create the Main module
-angular.module('miniGeekApp', ['Directives', 'ngCookies']).config(function ($routeProvider) {
+angular.module('miniGeekApp', ['Directives']).config(function ($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: 'views/main.html',
         controller: 'MenuCtrl'

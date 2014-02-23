@@ -1,7 +1,7 @@
 'use strict';
 
 //Main controller
-angular.module('miniGeekApp').controller('MainCtrl', function ($scope, $http, $routeParams, $location, EventBroadcaster,  $cookies, GeekService, UiService) {
+angular.module('miniGeekApp').controller('MainCtrl', function ($scope, $http, $routeParams, $location, EventBroadcaster, GeekService, UiService) {
     
      //Define a callback for the loading game services
     var updateGameList = function (data) {
@@ -9,11 +9,6 @@ angular.module('miniGeekApp').controller('MainCtrl', function ($scope, $http, $r
         $scope.gameList = data.result;
     };
 
-    //get cookie
-    $scope.cookieValue = $cookies;
-    if ($cookies.username !== undefined) {
-        $scope.username = $cookies.username;
-    }
     
     //function for showing game information on the clicked listed game
     $scope.getDetails = function (id) {
@@ -28,8 +23,6 @@ angular.module('miniGeekApp').controller('MainCtrl', function ($scope, $http, $r
     };
     
     $scope.collection = function () {
-        //Set cookie
-        $cookies.username = $scope.username;
         UiService.startSpinner();
         GeekService.getCollection($scope.username, $http, updateGameList);
     };
@@ -53,10 +46,6 @@ angular.module('miniGeekApp').controller('MainCtrl', function ($scope, $http, $r
         } else if (EventBroadcaster.message === 'collection') {
             $scope.message = 'Game collection';
             UiService.showForm('#collection-form');
-            //got username from cookie so get colllection automatic
-            if ($scope.username !== undefined && $scope.username !== '') {
-                $scope.collection();
-            }
         } else if (EventBroadcaster.message === 'about') {
             $scope.message = '';
             UiService.showForm('#about');
