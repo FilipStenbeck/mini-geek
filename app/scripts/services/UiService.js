@@ -30,7 +30,7 @@ angular.module('miniGeekApp').factory('UiService', function () {
         },
         showForm : function (id) {
             this.hideForum('#about');
-            $(id).fadeIn();
+            $(id).show();
         },
         hideForum : function (id) {
             $(id).hide();

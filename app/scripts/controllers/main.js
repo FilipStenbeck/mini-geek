@@ -35,7 +35,6 @@ angular.module('miniGeekApp').controller('MainCtrl', function ($scope, $http, $r
     
     //handle event broadcasted from the menu
     if (EventBroadcaster.eventName === 'menuClicked') {
-        //$('.game-details').hide();
         if (EventBroadcaster.message === 'popular') {
             $scope.message = 'Popular Games';
             UiService.startSpinner();
