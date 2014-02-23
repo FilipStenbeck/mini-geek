@@ -1,13 +1,5 @@
 'use strict';
 
-//The menu controller
-angular.module('miniGeekApp').controller('MenuCtrl', function ($scope, EventBroadcaster, UiService) {
-   
-    $scope.setSelected = function (item) {
-        UiService.hideWelcomeMsg();
-        $scope.selected = item;
-	};
-});
 
 //Search form
 angular.module('miniGeekApp').controller('StartSearchCtrl', function ($scope, EventBroadcaster, UiService) {
