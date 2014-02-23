@@ -1,8 +1,5 @@
 'use strict';
 
-
-
-
 //Create the Main module
 angular.module('miniGeekApp', ['Directives', 'ngCookies']).config(function ($routeProvider) {
     $routeProvider.when('/', {
